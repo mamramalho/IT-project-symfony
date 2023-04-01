@@ -1,0 +1,1 @@
+[02-Apr-2023 00:27:40 Europe/Lisbon] 2023-04-02T00:27:40+01:00 [critical] Uncaught Exception: Login throttling requires the Rate Limiter component. Try running "composer require symfony/rate-limiter".
