@@ -11,3 +11,5 @@ app_lucky_number:
 app_logout:
   path: /logout
   methods: GET
+
+
