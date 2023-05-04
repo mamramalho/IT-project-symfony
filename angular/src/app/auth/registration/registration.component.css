@@ -1,0 +1,19 @@
+.column-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.column-form > span {
+    margin-bottom: 5px;
+}
+
+.column-form > mat-form-field {
+    margin-bottom: 10px;
+}
+
+.custom-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
