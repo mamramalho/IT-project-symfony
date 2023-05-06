@@ -18,6 +18,10 @@
     cursor: pointer;
 }
 
+.password-rest-text {
+    margin-top: 10px;
+}
+
 .password-rest-text:hover {
     cursor: pointer;
     color: rgb(113, 113, 113);
