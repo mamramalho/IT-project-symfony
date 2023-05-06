@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import { RegistrationService } from 'src/app/services/registration.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -15,16 +15,17 @@ export class RegistrationComponent {
 
   requestInProgress = false;
 
+  hidePw = true;
+
   constructor(
     private fb: FormBuilder,
-    private registrationService: RegistrationService
+    private authService: AuthService
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       plainPassword: ['', Validators.required]
     });
   }
-
 
   onSubmit() {
     const email = this.form.controls['email'].value;
@@ -33,7 +34,7 @@ export class RegistrationComponent {
     const user = new User(email, plainPassword);
 
     this.requestInProgress = true;
-    this.registrationService.register(user).subscribe((response) => {
+    this.authService.register(user).subscribe((response) => {
         console.log(response);
         this.requestInProgress = false;
         this.doneRegistration.emit();

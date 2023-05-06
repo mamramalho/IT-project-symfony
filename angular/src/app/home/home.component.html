@@ -1,6 +1,6 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span>Third Line</span>
+<mat-toolbar>
+    <mat-toolbar-row class="main-row">
+        <span style="color: white">Third Line</span>
         <span class="spacer"></span>
         <button
             mat-icon-button
@@ -12,5 +12,12 @@
             mat-raised-button>
             Announce and Sell
         </button>
-      </mat-toolbar-row>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="search-row">
+        <form>
+            <mat-form-field class="centered-input">
+                <input matInput>
+            </mat-form-field>
+        </form>
+    </mat-toolbar-row>
 </mat-toolbar>

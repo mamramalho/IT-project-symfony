@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
-import { RegistrationService } from './services/registration.service';
+import { AuthService } from './services/auth.service';
 import { RegistrationComponent } from './auth/registration/registration.component';
 
 @NgModule({
@@ -39,7 +39,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
     HttpClientModule,
     MatProgressSpinnerModule,
   ],
-  providers: [RegistrationService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

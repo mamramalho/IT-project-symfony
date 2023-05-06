@@ -3,17 +3,15 @@
     background-size: cover;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh; /* Set the height of the container to be the full height of the viewport */
+    align-items: flex-start;
+    height: 100vh;
 }
   
 .box {
     background-color: rgba(255, 255, 255, 0.955);
     width: 400px;
-    height: 410px;
-    border: 1px solid rgba(128, 128, 128, 0.61);
     border-radius: 5px;
-    margin-bottom: 70px;
+    margin-top: 70px;
 }
 
 .custom-tab-group {
