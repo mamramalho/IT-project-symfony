@@ -12,6 +12,7 @@ class Vehicle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
@@ -50,7 +51,7 @@ class Vehicle
     #[ORM\Column(length: 20)]
     private ?int $km = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::JSON)]
     private array $images = [];
 
     public function getId(): ?int
@@ -204,6 +205,24 @@ class Vehicle
     public function setImages(array $images): self
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="vehicle")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
