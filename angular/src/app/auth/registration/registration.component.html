@@ -1,0 +1,42 @@
+<form 
+    [formGroup]="form" 
+    (ngSubmit)="onSubmit()" 
+    class="column-form">
+    <span>Email</span>
+    <mat-form-field>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="form.controls['email'].invalid">
+            Email is required
+        </mat-error>
+    </mat-form-field>
+    <span>Password</span>
+    <mat-form-field>
+        <input
+            matInput
+            formControlName="plainPassword"
+            [type]="hidePw ? 'password' : 'text'">
+        <mat-icon matSuffix class="custom-cursor" (click)="hidePw = !hidePw">{{hidePw ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="form.controls['plainPassword'].invalid">
+            Password is required
+        </mat-error>
+    </mat-form-field>
+
+    <p style="font-size: smaller;">
+        By clicking 'Sign Up', you agree with Elite Car Exchange <b>Terms and Conditions</b>
+    </p>
+
+    <button 
+        mat-raised-button
+        color="primary"
+        type="submit"
+        style="margin-bottom: 20px; margin-top: 10px;"
+        [disabled]="form.invalid"
+        *ngIf="!requestInProgress; else spinner">  
+        Sign Up
+    </button>
+    <ng-template #spinner>
+        <div class="custom-spinner">
+            <mat-spinner diameter="40" style="margin-top: 15px;"></mat-spinner>
+        </div>
+    </ng-template>
+</form>

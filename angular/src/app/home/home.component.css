@@ -1,0 +1,20 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.main-row {
+    height: 70px;
+    background-color: rgb(28, 28, 28);
+}
+
+.search-row {
+    height: 150px;
+}
+
+.centered-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300%;
+    margin: 0 auto;
+}

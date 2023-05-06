@@ -1,0 +1,24 @@
+.column-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.column-form > span {
+    margin-bottom: 5px;
+}
+
+.custom-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.custom-cursor:hover {
+    cursor: pointer;
+}
+
+.password-rest-text:hover {
+    cursor: pointer;
+    color: rgb(113, 113, 113);
+}

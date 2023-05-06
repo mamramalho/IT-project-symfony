@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="box">
+        <mat-tab-group class="custom-tab-group" #tabGroup animationDuration="0">
+            <mat-tab label="Sign In">
+                <ng-template matTabContent>
+                    <div class="margin-content">
+                        <app-login></app-login>
+                    </div>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="Sign Up">
+                <ng-template matTabContent>
+                    <div class="margin-content">
+                        <app-registration (doneRegistration)="selectLogin()"></app-registration>
+                    </div>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
