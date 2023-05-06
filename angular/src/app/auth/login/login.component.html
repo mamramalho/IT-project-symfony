@@ -3,14 +3,14 @@
     (ngSubmit)="onSubmit()" 
     class="column-form">
     <span>Email</span>
-    <mat-form-field style="margin-bottom: 10px;">
+    <mat-form-field appearance="outline" style="margin-bottom: 10px; width: 99%;">
         <input matInput formControlName="email">
         <mat-error *ngIf="form.controls['email'].invalid">
             Email is required
         </mat-error>
     </mat-form-field>
     <span>Password</span>
-    <mat-form-field>
+    <mat-form-field appearance="outline" style="width: 99%;">
         <input
             matInput
             formControlName="plainPassword"

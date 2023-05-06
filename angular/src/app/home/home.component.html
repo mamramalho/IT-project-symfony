@@ -1,11 +1,11 @@
 <mat-toolbar>
     <mat-toolbar-row class="main-row">
-        <span style="color: white">Third Line</span>
+        <span style="color: white">Elite Car Exchange</span>
         <span class="spacer"></span>
         <button
             mat-icon-button
-            routerLink="/auth"
-            style="margin-right: 10px;">
+            class="my-account-button"
+            routerLink="/auth">
             <mat-icon>person</mat-icon>
         </button>
         <button
@@ -15,9 +15,24 @@
     </mat-toolbar-row>
     <mat-toolbar-row class="search-row">
         <form>
-            <mat-form-field class="centered-input">
-                <input matInput>
-            </mat-form-field>
+            <div class="centered-container">
+                <mat-form-field class="search-bar" appearance="outline">
+                    <mat-icon matPrefix class="search-button">search</mat-icon>
+                    <mat-label>Search for cars</mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <mat-form-field class="location-field" appearance="outline">
+                    <mat-icon matPrefix>location_on</mat-icon>
+                    <mat-label>Poland</mat-label>
+                    <mat-select
+                        placeholder="Poland" 
+                        (selectionChange)="onSelected($event.value)">
+                        <mat-option *ngFor="let city of cities" [value]="city">
+                            {{city}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </form>
     </mat-toolbar-row>
 </mat-toolbar>

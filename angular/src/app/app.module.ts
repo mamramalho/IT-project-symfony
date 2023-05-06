@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
+import { MatSelectModule } from '@angular/material/select'; 
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -38,6 +39,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
     MatInputModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

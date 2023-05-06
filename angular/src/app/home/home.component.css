@@ -4,17 +4,45 @@
 
 .main-row {
     height: 70px;
-    background-color: rgb(28, 28, 28);
+    background-color: rgb(40, 40, 40);
+}
+
+.my-account-button {
+    color: white;
+    margin-right: 10px;
 }
 
 .search-row {
-    height: 150px;
-}
-
-.centered-input {
+    height: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300%;
-    margin: 0 auto;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar {
+    width: 1000px;
+    height: 55px;
+    background-color: white;
+    border-radius: 0px;
+}
+
+.location-field {
+    height: 55px;
+    background-color: white;
+    border-radius: 0px;
+}
+
+.search-button {
+    color:rgb(131, 131, 131)
+}
+
+.search-button:hover {
+    cursor: pointer;
+    color:rgb(0, 0, 0)
 }
