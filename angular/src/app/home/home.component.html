@@ -1,7 +1,7 @@
 <mat-toolbar>
     <mat-toolbar-row class="main-row">
-        <img src="../../assets/logo.png" alt="Logo" height="50" viewbox="0 0 351 100" >
-        <span class="spacer"></span>
+        <img src="../../assets/logo.png" alt="Logo" height="50" viewbox="0 0 351 100" onclick="location.reload()">
+        <span class="spacer"></span> 
         <button
             mat-icon-button
             class="my-account-button"
@@ -14,7 +14,7 @@
         </button>
     </mat-toolbar-row>
     <mat-toolbar-row class="search-row">
-        <form>
+        <form class="search-form">
             <div class="centered-container">
                 <mat-form-field class="search-bar" appearance="outline">
                     <mat-icon matPrefix class="search-button">search</mat-icon>
@@ -33,6 +33,46 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+           
+              
         </form>
     </mat-toolbar-row>
 </mat-toolbar>
+<div style="display: flex; justify-content: space-between;">
+    <div class="car-preview" style="width: 30%; border: 1px solid #ccc; padding: 10px;">
+      <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+        <img src="../../assets/corvete.jpg" alt="Car Image" width="100" height="100">
+      </div>
+      <h2 style="text-align: center;">Corvette</h2>
+      <p style="text-align: center;">Classic car from 1979</p>
+      <button style="display: block; margin: 0 auto;">View Details</button>
+    </div>
+  
+    <div class="car-preview" style="width: 30%; border: 1px solid #ccc; padding: 10px;">
+      <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+        <img src="../../assets/mustang2010.jpg" alt="Car Image" width="100" height="100">
+      </div>
+      <h2 style="text-align: center;">Mustang</h2>
+      <p style="text-align: center;">Sports car from 2010</p>
+      <button style="display: block; margin: 0 auto;">View Details</button>
+    </div>
+  
+    <div class="car-preview" style="width: 30%; border: 1px solid #ccc; padding: 10px;">
+      <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+        <img src="../../assets/mercedesgt2018.jpg" alt="Car Image" width="100" height="100">
+      </div>
+      <h2 style="text-align: center;">Mercedes-Benz</h2>
+      <p style="text-align: center;">Luxury car from 2018</p>
+      <button style="display: block; margin: 0 auto;">View Details</button>
+    </div>
+  
+    <div class="car-preview" style="width: 30%; border: 1px solid #ccc; padding: 10px;">
+      <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+        <img src="../../assets/audir8.jpg" alt="Car Image" width="100" height="100">
+      </div>
+      <h2 style="text-align: center;">Audi</h2>
+      <p style="text-align: center;">Luxury car from 2019</p>
+      <button style="display: block; margin: 0 auto;">View Details</button>
+    </div>
+  </div>
+  
