@@ -3,15 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -28,29 +25,22 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register', methods: ['POST'])]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(ManagerRegistry $doctrine, Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
-        $userData = json_decode($request->getContent(), true);
-
+        $em = $doctrine->getManager();
+        $decoded = json_decode($request->getContent());
+        $email = $decoded->email;
+        $plainPassword = $decoded->plainPassword;
+  
         $user = new User();
-        $user->setEmail($userData['email']);
-        $user->setPassword(
-            $userPasswordHasher->hashPassword(
-                $user,
-                $userData['plainPassword']
-            )
+        $hashedPassword = $passwordHasher->hashPassword(
+            $user,
+            $plainPassword
         );
-
-        $entityManager->persist($user);
-        $entityManager->flush();
-
-        $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-            (new TemplatedEmail())
-                ->from(new Address('elitecar.verify.email@gmail.com', 'Elite Car Exchange'))
-                ->to($user->getEmail())
-                ->subject('Please Confirm your Email')
-                ->htmlTemplate('registration/confirmation_email.html.twig')
-        );
+        $user->setPassword($hashedPassword);
+        $user->setEmail($email);
+        $em->persist($user);
+        $em->flush();
         
         $responseData = [
             'success' => true,

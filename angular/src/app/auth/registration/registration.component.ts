@@ -31,7 +31,7 @@ export class RegistrationComponent {
     const email = this.form.controls['email'].value;
     const plainPassword = this.form.controls['plainPassword'].value;
 
-    const user = new User(email, plainPassword);
+    const user: User = new User(email, plainPassword);
 
     this.requestInProgress = true;
     this.authService.register(user).subscribe((response) => {
