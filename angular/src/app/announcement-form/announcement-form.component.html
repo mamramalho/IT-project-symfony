@@ -1,0 +1,85 @@
+<div class="centered-div">
+    
+    <div class="limited-form">
+        <h1 style="margin-left: 20px">Announce Vehicle</h1>
+        <form 
+            [formGroup]="form" 
+            (ngSubmit)="onSubmit()" 
+            class="column-form">
+            <span><b>Title</b></span>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="title" placeholder="Title of the announcement">
+            </mat-form-field>
+            <span>Type</span>
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="type" placeholder="Type of vehicle">
+                    <mat-option value="car">Car</mat-option>
+                    <mat-option value="motorcycle">Motorcycle</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span>Brand</span>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="brand" placeholder="Brand">
+            </mat-form-field>
+            <span>Model</span>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="model" placeholder="Model">
+            </mat-form-field>
+            <span>Year</span>
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="year" placeholder="Year of manufactoring">
+                    <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span>Register Year</span>
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="registerYear" placeholder="Register Year">
+                    <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span>Price</span>
+            <mat-form-field appearance="outline">
+                <input matInput type="number" formControlName="price" placeholder="100 000">
+                <span matPrefix class="zloty">PLN</span>
+            </mat-form-field>
+            <span>Description</span>
+            <mat-form-field appearance="outline">
+                <textarea matInput formControlName="description" placeholder="Short description about the vehicle"></textarea>
+            </mat-form-field>
+            <span>Color</span>
+            <mat-form-field appearance="outline">
+                <mat-select placeholder="Color" formControlName="color">
+                    <mat-option *ngFor="let color of colors" [value]="color">
+                      <div class="color-circle" [style.backgroundColor]="color.code"></div>
+                      <span>{{color.name}}</span>
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+            <span>Fuel</span>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="fuel" placeholder="Type of fuel">
+            </mat-form-field>
+
+            <span>Images</span>
+            <input
+                type="file"
+                (change)="onImagesSelected($event)"
+                formControlName="images"
+                style="margin-bottom: 30px;">
+            
+            <div *ngIf="selectedImageUrls.length">
+                <div *ngFor="let imageUrl of selectedImageUrls; let i = index" style="display: inline-block; margin-right: 10px;">
+                    <img [src]="imageUrl" alt="Selected image" style="max-width: 100px; max-height: 100px;">
+                    <button mat-icon-button color="warn" (click)="removeImage(i)">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            
+            <button color="primary" mat-raised-button type="submit">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+.centered-div {
+    display: flex;
+    justify-content: center;
+}
+
+.column-form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.limited-form {
+    width: 1000px;
+}
+
+span {
+    margin-bottom: 5px;
+}
+
+.zloty {
+    color: rgba(112, 112, 112, 0.727);
+    margin-left: 10px;
+}
+.color-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}

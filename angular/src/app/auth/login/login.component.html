@@ -27,7 +27,8 @@
         color="primary"
         type="submit"
         style="margin-bottom: 20px; margin-top: 10px;"
-        [disabled]="form.invalid">  
+        [disabled]="form.invalid"
+        *ngIf="!requestInProgress; else spinner">  
         Sign In
     </button>
     <ng-template #spinner>

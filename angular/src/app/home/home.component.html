@@ -3,13 +3,21 @@
         <img src="../../assets/logo.png" alt="Logo" height="50" viewbox="0 0 351 100" onclick="location.reload()">
         <span class="spacer"></span> 
         <button
+          *ngIf="isLoggedIn()"
+          (click)="logout()"
+          mat-icon-button
+          class="logout-button">
+          <mat-icon>logout</mat-icon>
+        </button>
+        <button
             mat-icon-button
             class="my-account-button"
             routerLink="/auth">
             <mat-icon>person</mat-icon>
         </button>
         <button
-            mat-raised-button>
+            mat-raised-button
+            routerLink="/announce">
             Announce and Sell
         </button>
     </mat-toolbar-row>

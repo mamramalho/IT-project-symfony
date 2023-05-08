@@ -18,6 +18,7 @@ import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './services/auth.service';
 import { RegistrationComponent } from './auth/registration/registration.component';
+import { AnnouncementFormComponent } from './announcement-form/announcement-form.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
     AuthComponent,
     LoginComponent,
     RegistrationComponent,
+    AnnouncementFormComponent,
   ],
   imports: [
     BrowserModule,

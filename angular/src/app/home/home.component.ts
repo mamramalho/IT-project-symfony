@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -24,8 +25,20 @@ export class HomeComponent {
     'wielkopolskie',
     'zachodniopomorskie',
   ];
+
+  constructor(private authService: AuthService) {}
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
   
   onSelected(city: string): void {
     console.log(city);
   }
+
+
 }
