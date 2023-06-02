@@ -16,13 +16,14 @@ export class AuthService {
       .pipe(
         map((response: any) => {
           const token = response.token;
+          console.log('FUCKING TOKEN' + token);
           // Store the token in localStorage
           localStorage.setItem('access_token', token);
           return response;
         })
       );
   }
-  
+
   logout(): void {
     // Remove the token from localStorage
     localStorage.removeItem('access_token');
@@ -36,5 +37,5 @@ export class AuthService {
   register(user: User): Observable<any> {
     return this.httpClient.post(this.baseUrl+'/register', user);
   }
-  
+
 }
