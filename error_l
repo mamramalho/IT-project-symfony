@@ -25,3 +25,14 @@
 [03-Jun-2023 15:01:27 Europe/Lisbon] 2023-06-03T15:01:27+01:00 [info] User Deprecated: The "Monolog\Logger" class is considered final. It may change without further notice as of its next major version. You should not extend it from "Symfony\Bridge\Monolog\Logger".
 [03-Jun-2023 15:01:27 Europe/Lisbon] 2023-06-03T15:01:27+01:00 [critical] Uncaught Exception: Failed to remove directory "/var/www/app/var/cache/dev/ContainerDlXmVu7": rmdir(/var/www/app/var/cache/dev/..4jF): Directory not empty
 [03-Jun-2023 15:35:36 Europe/Lisbon] 2023-06-03T15:35:36+01:00 [info] User Deprecated: The "Monolog\Logger" class is considered final. It may change without further notice as of its next major version. You should not extend it from "Symfony\Bridge\Monolog\Logger".
+[03-Jun-2023 19:28:16 Europe/Lisbon] 2023-06-03T19:28:15+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[03-Jun-2023 19:28:23 Europe/Lisbon] 2023-06-03T19:28:23+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[03-Jun-2023 19:29:03 Europe/Lisbon] 2023-06-03T19:29:03+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[03-Jun-2023 19:36:28 Europe/Lisbon] 2023-06-03T19:36:28+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[03-Jun-2023 19:36:32 Europe/Lisbon] 2023-06-03T19:36:32+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[03-Jun-2023 19:46:55 Europe/Lisbon] 2023-06-03T19:46:55+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[03-Jun-2023 19:49:19 Europe/Lisbon] 2023-06-03T19:49:19+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[03-Jun-2023 20:06:56 Europe/Lisbon] 2023-06-03T20:06:56+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[03-Jun-2023 20:49:11 Europe/Lisbon] 2023-06-03T20:49:11+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[03-Jun-2023 20:49:11 Europe/Lisbon] 2023-06-03T20:49:11+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[03-Jun-2023 20:49:31 Europe/Lisbon] 2023-06-03T20:49:31+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found

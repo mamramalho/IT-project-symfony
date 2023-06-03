@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\VehicleRepository;
 use Doctrine\DBAL\Types\Types;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VehicleRepository::class)]
@@ -52,6 +53,22 @@ class Vehicle
 
     #[ORM\Column(type: Types::ARRAY)]
     private array $images = [];
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "vehicles")]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
