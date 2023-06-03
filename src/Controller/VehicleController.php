@@ -6,13 +6,15 @@ use App\Entity\Vehicle;
 use App\Form\VehicleType;
 use App\Repository\VehicleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\SecurityBundle\Security;
 
-#[Route('/vehicle')]
+#[Route('/api/vehicle')]
 class VehicleController extends AbstractController
 {
     private $security;
@@ -23,36 +25,53 @@ class VehicleController extends AbstractController
     }
 
     #[Route('/', name: 'vehicle_index', methods: ['GET'])]
-    public function index(VehicleRepository $vehicleRepository): Response{
-        $user = $this->security->getUser();
+    public function index(VehicleRepository $vehicleRepository): JsonResponse{
+        /*$user = $this->security->getUser();
         $vehicles = $vehicleRepository->findBy(['user' => $user]);
     
         return $this->render('vehicle/index.html.twig', [
             'vehicles' => $vehicles,
-        ]);
+        ]);*/
+
+        $vehicles = $vehicleRepository->findAll();
+        return new JsonResponse($vehicles);
     }
 
-    #[Route('/new', name: 'vehicle_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new', name: 'vehicle_new', methods: ['POST'])]
+    public function new(ManagerRegistry $doctrine, Request $request): JsonResponse
     {
         $vehicle = new Vehicle();
-        $form = $this->createForm(VehicleType::class, $vehicle);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this->security->getUser();
-            $vehicle->setUser($user);
+        $em = $doctrine->getManager();
+        $decoded = json_decode($request->getContent());
 
-            $entityManager->persist($vehicle);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('vehicle_index');
+        $vehicle->setName($decoded->name);
+        $vehicle->setCompany($decoded->company);
+        $vehicle->setType($decoded->type);
+        $vehicle->setModel($decoded->model);
+        $vehicle->setYear($decoded->year);
+        $vehicle->setRegisterYear($decoded->registerYear);
+        $vehicle->setPrice($decoded->price);
+        if ($decoded->description != null) {
+            $vehicle->setDescription($decoded->description);
         }
+        if ($decoded->color != null) {
+            $vehicle->setColor($decoded->color);
+        }
+        $vehicle->setFuel($decoded->fuel);
+        $vehicle->setPlate($decoded->plate);
+        $vehicle->setKm($decoded->km);
+        $vehicle->setImages($decoded->images);
 
-        return $this->render('vehicle/new.html.twig', [
-            'vehicle' => $vehicle,
-            'form' => $form->createView(),
-        ]);
+        $em->persist($vehicle);
+        $em->flush();
+
+        $responseData = [
+            'success' => true,
+            'message' => 'Vehicle added successfully'
+        ];
+
+        return new JsonResponse($responseData);
     }
 
 
