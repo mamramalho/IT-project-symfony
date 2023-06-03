@@ -16,7 +16,6 @@ export class AuthService {
       .pipe(
         map((response: any) => {
           const token = response.token;
-          console.log('FUCKING TOKEN' + token);
           // Store the token in localStorage
           localStorage.setItem('access_token', token);
           return response;

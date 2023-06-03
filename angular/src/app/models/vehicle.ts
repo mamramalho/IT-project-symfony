@@ -11,7 +11,7 @@ export class Vehicle {
         private color: string,
         private fuel: string,
         private plate: string,
-        private km: number,
+        private kms: number,
         private images: string[],
     ) {}
 }
