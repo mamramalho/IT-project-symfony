@@ -34,6 +34,10 @@ export class AuthService {
     return localStorage.getItem('access_token') !== null;
   }
 
+  getToken() {
+    return localStorage.getItem('access_token');
+  }
+
   register(user: User): Observable<any> {
     return this.httpClient.post(this.baseUrl+'/register', user);
   }
