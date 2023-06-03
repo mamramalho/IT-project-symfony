@@ -1,124 +1,190 @@
-<mat-toolbar>
-  <mat-toolbar-row class="main-row">
-    <img src="../../assets/logo.png" alt="Logo" height="50" viewbox="0 0 351 100" >
-    <span class="spacer"></span> 
-    <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button class="logout-button">
-      <mat-icon>logout</mat-icon>
-    </button>
-    <button mat-icon-button class="my-account-button" routerLink="/auth">
-      <mat-icon>person</mat-icon>
-    </button>
-    <button mat-raised-button routerLink="/announce">Announce and Sell</button>
-  </mat-toolbar-row>
-  <mat-toolbar-row class="search-row">
-    <form class="search-form">
-      <div class="centered-container">
-        <mat-form-field class="search-bar" appearance="outline">
-          <mat-icon matPrefix class="search-button">search</mat-icon>
-          <mat-label>Search for cars</mat-label>
-          <input matInput>
-        </mat-form-field>
-        <mat-form-field class="location-field" appearance="outline">
-          <mat-icon matPrefix>location_on</mat-icon>
-          <mat-label>Poland</mat-label>
-          <mat-select placeholder="Poland" (selectionChange)="onSelected($event.value)">
-            <mat-option *ngFor="let city of cities" [value]="city">
-              {{city}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Showroom</title>
+  
+</head>
+
+<body>
+  <div class="page-container">
+    <mat-toolbar>
+      <mat-toolbar-row class="main-row">
+        <div class="logo-container">
+          <img src="../../assets/logo.png" alt="Logo" height="50" viewbox="0 0 351 100">
+        </div>
+        <span class="spacer"></span>
+        <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button class="logout-button">
+          <mat-icon>logout</mat-icon>
+        </button>
+        <button mat-icon-button class="my-account-button" routerLink="/auth">
+          <mat-icon>person</mat-icon>
+        </button>
+        <button mat-raised-button routerLink="/announce">Announce and Sell</button>
+      </mat-toolbar-row>
+      <mat-toolbar-row class="search-row">
+        <form class="search-form">
+          <div class="centered-container">
+            <mat-form-field class="search-bar" appearance="outline">
+              <mat-icon matPrefix class="search-button">search</mat-icon>
+              <mat-label>Search for cars</mat-label>
+              <input matInput>
+            </mat-form-field>
+            <mat-form-field class="location-field" appearance="outline">
+              <mat-icon matPrefix>location_on</mat-icon>
+              <mat-label>Poland</mat-label>
+              <mat-select placeholder="Poland" (selectionChange)="onSelected($event.value)">
+                <mat-option *ngFor="let city of cities" [value]="city">
+                  {{city}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </form>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="car-container">
+      <!-- First Row -->
+      <div class="car-row">
+        <div class="car-preview">
+          <div class="car-image">
+            <img src="../../assets/corvete.jpg" alt="Car Image">
+          </div>
+          <h2 class="car-title">Corvette</h2>
+          <p class="car-description">Classic car from 1979</p>
+          <button class="view-details-button">View Details</button>
+        </div>
+
+        <div class="car-preview">
+          <div class="car-image">
+            <img src="../../assets/mustang2010.jpg" alt="Car Image">
+          </div>
+          <h2 class="car-title">Mustang</h2>
+          <p class="car-description">Sports car from 2010</p>
+          <button class="view-details-button">View Details</button>
+        </div>
+
+        <div class="car-preview">
+          <div class="car-image">
+            <img src="../../assets/mercedesgt2018.jpg" alt="Car Image">
+          </div>
+          <h2 class="car-title">Mercedes-Benz</h2>
+          <p class="car-description">Luxury car from 2018</p>
+          <button class="view-details-button">View Details</button>
+        </div>
       </div>
-    </form>
-  </mat-toolbar-row>
-</mat-toolbar>
 
-<div style="display: flex; justify-content: space-between;">
-  <div class="car-preview" style="width: 30%; border: 1px solid #ccc; padding: 10px;" >
-    <div style="display: flex; justify-content: center; margin-bottom: 10px;">
-      <img src="../../assets/corvete.jpg" alt="Car Image" width="100" height="100">
+      <!-- Second Row -->
+      <div class="car-row">
+        <div class="car-preview">
+          <div class="car-image">
+            <img src="../../assets/audir8.jpg" alt="Car Image">
+          </div>
+          <h2 class="car-title">Audi</h2>
+          <p class="car-description">Luxury car from 2019</p>
+          <button class="view-details-button">View Details</button>
+        </div>
+
+        <div class="car-preview">
+          <div class="car-image">
+            <img src="../../assets/audir8.jpg" alt="Car Image">
+          </div>
+          <h2 class="car-title">Audi</h2>
+          <p class="car-description">Luxury car from 2019</p>
+          <button class="view-details-button">View Details</button>
+        </div>
+
+        <!-- Add more cars here -->
+      </div>
     </div>
-    <h2 style="text-align: center;">Corvette</h2>
-    <p style="text-align: center;">Classic car from 1979</p>
-    <button style="display: block; margin: 0 auto;">View Details</button>
   </div>
 
-  <div class="car-preview" style="width: 30%; border: 1px solid #ccc; padding: 10px;" >
-    <div style="display: flex; justify-content: center; margin-bottom: 10px;">
-      <img src="../../assets/mustang2010.jpg" alt="Car Image" width="100" height="100">
-    </div>
-    <h2 style="text-align: center;">Mustang</h2>
-    <p style="text-align: center;">Sports car from 2010</p>
-    <button style="display: block; margin: 0 auto;">View Details</button>
-  </div>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
 
-  <div class="car-preview" style="width: 30%; border: 1px solid #ccc; padding: 10px;" >
-    <div style="display: flex; justify-content: center; margin-bottom: 10px;">
-      <img src="../../assets/mercedesgt2018.jpg" alt="Car Image" width="100" height="100">
-    </div>
-    <h2 style="text-align: center;">Mercedes-Benz</h2>
-    <p style="text-align: center;">Luxury car from 2018</p>
-    <button style="display: block; margin: 0 auto;">View Details</button>
-  </div>
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-  <div class="car-preview" style="width: 30%; border: 1px solid #ccc; padding: 10px;" >
-    <div style="display: flex; justify-content: center; margin-bottom: 10px;">
-      <img src="../../assets/audir8.jpg" alt="Car Image" width="100" height="100">
-    </div>
-    <h2 style="text-align: center;">Audi</h2>
-    <p style="text-align: center;">Luxury car from 2019</p>
-    <button style="display: block; margin: 0 auto;">View Details</button>
-  </div>
-  <div class="car-preview" style="width: 30%; border: 1px solid #ccc; padding: 10px;" >
-    <div style="display: flex; justify-content: center; margin-bottom: 10px;">
-      <img src="../../assets/audir8.jpg" alt="Car Image" width="100" height="100">
-    </div>
-    <h2 style="text-align: center;">Audi</h2>
-    <p style="text-align: center;">Luxury car from 2019</p>
-    <button style="display: block; margin: 0 auto;">View Details</button>
-  </div>
-</div>
+    .car-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
 
-<style>
-  .car-preview {
-    width: 30%;
-    border: 1px solid #ccc;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
-    cursor: pointer;
-  }
+    .car-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
 
-  .car-preview:hover {
-    transform: scale(1.1);
-  }
+    .car-preview {
+      width: 30%;
+      border: 1px solid #ccc;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
 
-  .car-preview img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
+    .car-preview:hover {
+      transform: scale(1.1);
+    }
 
-  .car-preview h2,
-  .car-preview p {
-    text-align: center;
-    margin: 0;
-  }
+    .car-preview img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
 
-  .car-preview button {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+    .car-title {
+      text-align: center;
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-  .car-preview button:hover {
-    background-color: #0056b3;
-  }
-</style>
+    .car-description {
+      text-align: center;
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .view-details-button {
+      background-color: rgba(91, 79, 10, 0.601);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .view-details-button:hover {
+      background-color: #000000;
+    }
+  </style>
+</body>
+
+</html>
