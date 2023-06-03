@@ -51,11 +51,11 @@ export class AnnouncementFormComponent {
       year: ['', Validators.required],
       registerYear: ['', Validators.required],
       price: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      description: [''],
-      color: [''],
+      description: ['', Validators.required],
+      color: ['', Validators.required],
       fuel: ['', Validators.required],
       plate: ['', Validators.required],
-      kms: ['', Validators.required],
+      kms: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
     });
 
   }
@@ -88,10 +88,10 @@ export class AnnouncementFormComponent {
     const registerYear = this.form.controls['registerYear'].value;
     const price = this.form.controls['price'].value;
     const description = this.form.controls['description'].value;
-    const color = this.form.controls['color'].value;
+    const color = this.form.controls['color'].value.code;
     const fuel = this.form.controls['fuel'].value;
     const plate = this.form.controls['plate'].value;
-    const km = this.form.controls['kms'].value;
+    const kms = this.form.controls['kms'].value;
 
     const vehicle = new Vehicle(
       name,
@@ -105,7 +105,7 @@ export class AnnouncementFormComponent {
       color,
       fuel,
       plate,
-      km,
+      kms,
       this.selectedImageUrls,
     );
 

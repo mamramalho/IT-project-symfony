@@ -12,7 +12,6 @@ class Vehicle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
@@ -21,37 +20,37 @@ class Vehicle
     #[ORM\Column(length: 100)]
     private ?string $company = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 20)]
     private ?string $type = null;
 
-    #[ORM\Column(length: 65)]
+    #[ORM\Column(length: 255)]
     private ?string $model = null;
 
-    #[ORM\Column(length: 4)]
+    #[ORM\Column]
     private ?int $year = null;
 
-    #[ORM\Column(length: 4)]
+    #[ORM\Column]
     private ?int $registerYear = null;
 
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 40)]
     private ?string $color = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $fuel = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 255)]
     private ?string $plate = null;
 
-    #[ORM\Column(length: 20)]
-    private ?int $km = null;
+    #[ORM\Column]
+    private ?int $kms = null;
 
-    #[ORM\Column(type: Types::JSON)]
+    #[ORM\Column(type: Types::ARRAY)]
     private array $images = [];
 
     public function getId(): ?int
@@ -71,21 +70,27 @@ class Vehicle
         return $this;
     }
 
-    public function getCompany() : ?string {
+    public function getCompany(): ?string
+    {
         return $this->company;
     }
 
-    public function setCompany(string $company): self {
+    public function setCompany(string $company): self
+    {
         $this->company = $company;
+
         return $this;
     }
 
-    public function getType() : ?string {
+    public function getType(): ?string
+    {
         return $this->type;
     }
 
-    public function setType(string $type): self {
+    public function setType(string $type): self
+    {
         $this->type = $type;
+
         return $this;
     }
 
@@ -101,7 +106,7 @@ class Vehicle
         return $this;
     }
 
-    public function getYear(): ?string
+    public function getYear(): ?int
     {
         return $this->year;
     }
@@ -142,7 +147,7 @@ class Vehicle
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -154,7 +159,7 @@ class Vehicle
         return $this->color;
     }
 
-    public function setColor(?string $color): self
+    public function setColor(string $color): self
     {
         $this->color = $color;
 
@@ -166,7 +171,7 @@ class Vehicle
         return $this->fuel;
     }
 
-    public function setFuel(?string $fuel): self
+    public function setFuel(string $fuel): self
     {
         $this->fuel = $fuel;
 
@@ -178,21 +183,21 @@ class Vehicle
         return $this->plate;
     }
 
-    public function setPlate(?string $plate): self
+    public function setPlate(string $plate): self
     {
         $this->plate = $plate;
 
         return $this;
     }
 
-    public function getKm(): ?int
+    public function getKms(): ?int
     {
-        return $this->km;
+        return $this->kms;
     }
 
-    public function setKm(?int $km): self
+    public function setKms(int $kms): self
     {
-        $this->km = $km;
+        $this->kms = $kms;
 
         return $this;
     }
@@ -205,24 +210,6 @@ class Vehicle
     public function setImages(array $images): self
     {
         $this->images = $images;
-
-        return $this;
-    }
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="vehicle")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }

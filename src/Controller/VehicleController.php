@@ -7,12 +7,14 @@ use App\Form\VehicleType;
 use App\Repository\VehicleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 #[Route('/api/vehicle')]
 class VehicleController extends AbstractController
@@ -60,7 +62,7 @@ class VehicleController extends AbstractController
         }
         $vehicle->setFuel($decoded->fuel);
         $vehicle->setPlate($decoded->plate);
-        $vehicle->setKm($decoded->km);
+        $vehicle->setKms($decoded->kms);
         $vehicle->setImages($decoded->images);
 
         $em->persist($vehicle);

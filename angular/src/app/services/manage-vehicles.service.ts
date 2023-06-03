@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Vehicle } from '../models/vehicle';
 import { Observable } from 'rxjs';
@@ -13,7 +13,10 @@ export class ManageVehiclesService {
   constructor(private httpClient: HttpClient) { }
 
   addVehicle(vehicle: Vehicle): Observable<any> {
-    return this.httpClient.post(this.baseUrl + '/vehicle/new', vehicle);
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.httpClient.post(this.baseUrl + '/vehicle/new', vehicle, { headers },);
   }
 
   getVehicles(): Observable<any> {
