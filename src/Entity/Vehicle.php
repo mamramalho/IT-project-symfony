@@ -54,21 +54,22 @@ class Vehicle
     #[ORM\Column(type: Types::ARRAY)]
     private array $images = [];
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "vehicles")]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "Vehicle")]
+    #[ORM\Column(nullable: true)]
+    private ?int $userId = null;
 
-    public function getUser(): ?User
+    public function getUserId(): ?int
     {
-        return $this->user;
+        return $this->userId;
     }
 
-    public function setUser(?User $user): self
+    public function setUserId(?int $userId): self
     {
-        $this->user = $user;
+        $this->userId = $userId;
 
         return $this;
     }
+
 
     public function getId(): ?int
     {
