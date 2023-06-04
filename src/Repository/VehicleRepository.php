@@ -39,20 +39,17 @@ class VehicleRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Vehicle[] Returns an array of Vehicle objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('v.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   public function findByNameOrCompany($value): array
+   {
+       return $this->createQueryBuilder('v')
+           ->andWhere('v.name = :val')
+           ->orWhere('v.company = :val')
+           ->setParameter('val', $value)
+           ->orderBy('v.id', 'ASC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Vehicle
 //    {

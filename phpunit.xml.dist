@@ -30,6 +30,13 @@
         <!-- Gmail SHOULD NOT be used on production, use it in development only. -->
         <!-- MAILER_DSN=gmail://USERNAME:PASSWORD@default -->
         <!-- ###- symfony/google-mailer ### -->
+
+        <!-- ###+ algolia/search-bundle ### -->
+        <!-- Create a free account on www.algolia.com -->
+        <!-- and get your credentials from the API Keys tab. -->
+        <env name="ALGOLIA_APP_ID" value="..."/>
+        <env name="ALGOLIA_API_KEY" value="..."/>
+        <!-- ###- algolia/search-bundle ### -->
     </php>
 
     <testsuites>
