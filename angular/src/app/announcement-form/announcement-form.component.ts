@@ -30,6 +30,25 @@ export class AnnouncementFormComponent {
     { name: 'Yellow', code: '#FFFF00' }
   ];
 
+  cities: string[] = [
+    'dolnośląskie',
+    'kujawsko-pomorskie',
+    'lubelskie',
+    'lubuskie',
+    'łódzkie',
+    'małopolskie',
+    'mazowieckie',
+    'opolskie',
+    'podkarpackie',
+    'podlaskie',
+    'pomorskie',
+    'śląskie',
+    'świętokrzyskie',
+    'warmińsko-mazurskie',
+    'wielkopolskie',
+    'zachodniopomorskie',
+  ];
+
   selectedImageUrls: string[] = [];
 
   requestInProgress = false;
@@ -58,6 +77,7 @@ export class AnnouncementFormComponent {
       fuel: ['', Validators.required],
       plate: ['', Validators.required],
       kms: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      city: ['', Validators.required],
     });
 
   }
@@ -94,6 +114,7 @@ export class AnnouncementFormComponent {
     const fuel = this.form.controls['fuel'].value;
     const plate = this.form.controls['plate'].value;
     const kms = this.form.controls['kms'].value;
+    const city = this.form.controls['city'].value;
 
     const vehicle = new Vehicle(
       name,
@@ -109,6 +130,7 @@ export class AnnouncementFormComponent {
       plate,
       kms,
       this.selectedImageUrls,
+      city,
     );
 
     this.requestInProgress = true;

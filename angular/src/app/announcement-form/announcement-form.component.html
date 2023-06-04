@@ -68,6 +68,13 @@
                 <input matInput type="number" formControlName="kms" placeholder="Current vehicle kilometers">
             </mat-form-field>
 
+            <span>City</span>
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="city" placeholder="Poland">
+                    <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
             <span>Images</span>
             <input
                 type="file"
@@ -83,7 +90,6 @@
                 </div>
             </div>
 
-            
             <button
                 class="custom-button"
                 mat-raised-button 
