@@ -10,6 +10,7 @@ import { Vehicle } from '../models/vehicle';
 })
 export class HomeComponent implements OnInit {
   searchText: string = '';
+  city: string = '';
 
   cities: string[] = [
     'dolnośląskie',
@@ -58,15 +59,16 @@ export class HomeComponent implements OnInit {
   }
   
   onSelected(city: string): void {
-    console.log(city);
+    this.city = city;
+    this.searchVehicle()
   }
 
   searchVehicle() {
     console.log(this.searchText);
 
-    this.vehicleService.search(this.searchText).subscribe(
+    this.vehicleService.search(this.searchText, this.city).subscribe(
       (response) => {
-        console.log(response);
+        this.vehicles = response as Vehicle[];
       }
     );
   }

@@ -24,17 +24,9 @@ class VehicleController extends AbstractController
     }
 
     #[Route('/', name: 'vehicle_index', methods: ['GET'])]
-    public function getAllVehicles(VehicleRepository $vehicleRepository): JsonResponse
+    public function getAllVehicles(VehicleRepository $vehicleRepository, Request $request): JsonResponse
     {
-        $vehicles = $vehicleRepository->findAll();
-        return $this->json($vehicles);
-    }
-    
-    #[Route('/search', name: 'vehicle_search', methods: ['GET'])]
-    public function search(VehicleRepository $vehicleRepository, Request $request): Response
-    {
-        $request->query->get('searchText');
-        $vehicles = $vehicleRepository->findByNameOrCompany($request);
+        $vehicles = $vehicleRepository->search($request->query->get('searchText'), $request->query->get('searchCity'));
         return $this->json($vehicles);
     }
 
@@ -73,7 +65,6 @@ class VehicleController extends AbstractController
         $vehicle->setPlate($decoded->plate);
         $vehicle->setKms($decoded->kms);
         $vehicle->setImages($decoded->images);
-        $vehicle->setCity($decoded->city);
         $vehicle->setUserId($userId);
 
         $em->persist($vehicle);

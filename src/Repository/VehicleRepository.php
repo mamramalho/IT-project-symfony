@@ -21,6 +21,23 @@ class VehicleRepository extends ServiceEntityRepository
         parent::__construct($registry, Vehicle::class);
     }
 
+    public function search(string $text = null, string $city = null): array
+    {
+        $queryBuilder = $this->createQueryBuilder('v');
+ 
+        if ($text) {
+             $queryBuilder->andWhere('v.name = :text OR v.company = :text OR v.model = :text')
+                 ->setParameter('text', $text);
+        }
+ 
+         if ($city) {
+             $queryBuilder->andWhere('v.city = :city')
+                 ->setParameter('city', $city);
+         }
+ 
+         return $queryBuilder->getQuery()->getResult();
+    } 
+
     public function save(Vehicle $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -38,27 +55,6 @@ class VehicleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-   public function findByNameOrCompany($value): array
-   {
-       return $this->createQueryBuilder('v')
-           ->andWhere('v.name = :val')
-           ->orWhere('v.company = :val')
-           ->setParameter('val', $value)
-           ->orderBy('v.id', 'ASC')
-           ->getQuery()
-           ->getResult()
-       ;
-   }
-
-   public function getAllUniqueCompanies(): array
-   {
-    return $this->createQueryBuilder('v')
-        ->distinct('v.company')
-        ->getQuery()
-        ->getResult();
-   }
-
 //    public function findOneBySomeField($value): ?Vehicle
 //    {
 //        return $this->createQueryBuilder('v')
