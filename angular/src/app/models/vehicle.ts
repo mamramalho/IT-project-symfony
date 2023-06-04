@@ -13,5 +13,6 @@ export class Vehicle {
         public plate: string,
         public kms: number,
         public images: string[],
+        public id?: number,
     ) {}
 }

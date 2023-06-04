@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { Vehicle } from 'src/app/models/vehicle';
 import { ManageVehiclesService } from '../services/manage-vehicles.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-announcement-form',
@@ -37,6 +38,7 @@ export class AnnouncementFormComponent {
   constructor(
     private fb: FormBuilder,
     private vehicleService: ManageVehiclesService,
+    private router: Router,
   ) {
     const currentYear = new Date().getFullYear();
     for (let year = currentYear; year >= 1886; year--) {
@@ -88,7 +90,7 @@ export class AnnouncementFormComponent {
     const registerYear = this.form.controls['registerYear'].value;
     const price = this.form.controls['price'].value;
     const description = this.form.controls['description'].value;
-    const color = this.form.controls['color'].value.code;
+    const color = this.form.controls['color'].value.name;
     const fuel = this.form.controls['fuel'].value;
     const plate = this.form.controls['plate'].value;
     const kms = this.form.controls['kms'].value;
@@ -109,12 +111,13 @@ export class AnnouncementFormComponent {
       this.selectedImageUrls,
     );
 
-    this.requestInProgress = true;
+    //this.requestInProgress = true;
 
     this.vehicleService.addVehicle(vehicle).subscribe(
       (response) => {
         console.log(response);
         this.requestInProgress = false;
+        this.router.navigate(['']);
       }
     );
   }

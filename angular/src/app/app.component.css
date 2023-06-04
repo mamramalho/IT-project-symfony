@@ -1,0 +1,20 @@
+
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.main-row {
+    height: 70px;
+    background-color: rgb(40, 40, 40);
+}
+
+.logout-button {
+    color: white;
+    margin-right: 5px;
+}
+
+.my-account-button {
+    color: white;
+    margin-right: 10px;
+}

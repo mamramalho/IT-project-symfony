@@ -1,67 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<mat-toolbar>
+  <mat-toolbar-row class="search-row">
+    <form class="search-form">
+      <div class="centered-container">
+        <mat-form-field class="search-bar" appearance="outline">
+          <mat-icon matPrefix class="search-button">search</mat-icon>
+          <mat-label>Search for cars</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field class="location-field" appearance="outline">
+          <mat-icon matPrefix>location_on</mat-icon>
+          <mat-label>Poland</mat-label>
+          <mat-select placeholder="Poland" (selectionChange)="onSelected($event.value)">
+            <mat-option *ngFor="let city of cities" [value]="city">
+              {{city}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Car Showroom</title>
-  
-</head>
-
-<body>
-  <div class="page-container">
-    <mat-toolbar>
-      <mat-toolbar-row class="main-row">
-        <div class="logo-container">
-          <img src="../../assets/logo.png" alt="Logo" height="50" viewbox="0 0 351 100">
+<div class="car-container" *ngIf="vehicles.length || !isFetching; else spinner">
+  <div *ngFor="let vehicle of vehicles; let i = index;">
+    <div class="car-row" *ngIf="i % 3 === 0">
+      <div 
+        class="car-preview"
+        *ngFor="let subVehicle of vehicles.slice(i, i + 3)"
+        [routerLink]="['/vehicle_details', subVehicle.id]">
+        <div class="car-image">
+          <img src="{{subVehicle.images[0]}}" alt="Car Image">
         </div>
-        <span class="spacer"></span>
-        <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button class="logout-button">
-          <mat-icon>logout</mat-icon>
-        </button>
-        <button mat-icon-button class="my-account-button" routerLink="/auth">
-          <mat-icon>person</mat-icon>
-        </button>
-        <button mat-raised-button routerLink="/announce">Announce and Sell</button>
-      </mat-toolbar-row>
-      <mat-toolbar-row class="search-row">
-        <form class="search-form">
-          <div class="centered-container">
-            <mat-form-field class="search-bar" appearance="outline">
-              <mat-icon matPrefix class="search-button">search</mat-icon>
-              <mat-label>Search for cars</mat-label>
-              <input matInput>
-            </mat-form-field>
-            <mat-form-field class="location-field" appearance="outline">
-              <mat-icon matPrefix>location_on</mat-icon>
-              <mat-label>Poland</mat-label>
-              <mat-select placeholder="Poland" (selectionChange)="onSelected($event.value)">
-                <mat-option *ngFor="let city of cities" [value]="city">
-                  {{city}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </form>
-      </mat-toolbar-row>
-    </mat-toolbar>
-
-    <div class="car-container">
-      <!-- First Row -->
-      <div *ngFor="let vehicle of vehicles; let i = index;">
-        <div class="car-row" *ngIf="i % 3 === 0">
-          <div class="car-preview" *ngFor="let subVehicle of vehicles.slice(i, i + 3)">
-            <div class="car-image">
-              <img src="{{subVehicle.images[0]}}" alt="Car Image">
-            </div>
-            <h2 class="car-title">{{ subVehicle.name }}</h2>
-            <p class="car-description">{{ subVehicle.description }}</p>
-            <button class="view-details-button">View Details</button>
-          </div>
-        </div>
+        <h2 class="car-title">{{ subVehicle.name }}</h2>
+        <p class="car-description">{{ subVehicle.description }}</p>
+        <button class="view-details-button">View Details</button>
       </div>
     </div>
   </div>
-</body>
-
-</html>
+</div>
+<ng-template #spinner>
+  <div class="cust-spin">
+    <mat-spinner diameter="100"></mat-spinner>
+  </div>
+</ng-template>
