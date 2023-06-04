@@ -35,6 +35,6 @@ export class ManageVehiclesService {
       params = params.append(key, data[key]);
     }
  
-    return this.httpClient.get(`${this.baseUrl}/search`, { params });
+    return this.httpClient.get(`${this.baseUrl}`, { params });
   }
 }
