@@ -27,22 +27,23 @@ class VehicleController extends AbstractController
     }
 
     #[Route('/', name: 'vehicle_index', methods: ['GET'])]
-    public function index(VehicleRepository $vehicleRepository): JsonResponse{
-        /*$user = $this->security->getUser();
+    public function index(VehicleRepository $vehicleRepository): JsonResponse
+    {
+        $user = $this->security->getUser();
         $vehicles = $vehicleRepository->findBy(['user' => $user]);
-    
-        return $this->render('vehicle/index.html.twig', [
-            'vehicles' => $vehicles,
-        ]);*/
 
-        $vehicles = $vehicleRepository->findAll();
         return new JsonResponse($vehicles);
     }
 
     #[Route('/new', name: 'vehicle_new', methods: ['POST'])]
-    public function new(ManagerRegistry $doctrine, Request $request): JsonResponse
+    public function new(ManagerRegistry $doctrine, Request $request, $security): JsonResponse
     {
-        $vehicle = new Vehicle();
+
+        //AQUI problem retribuing the userId!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        $user = $security->getUser();
+        $userId = $user->getId();
+
+        $vehicle = new Vehicle($userId);
 
         $em = $doctrine->getManager();
         $decoded = json_decode($request->getContent());

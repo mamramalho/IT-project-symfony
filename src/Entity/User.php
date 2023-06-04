@@ -141,26 +141,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function addVehicle(Vehicle $vehicle): self
-{
-    if (!$this->vehicles->contains($vehicle)) {
-        $this->vehicles[] = $vehicle;
-        $vehicle->setUserId($this->id); // Set the user ID in the vehicle entity
-    }
-
-    return $this;
-}
-
-public function removeVehicle(Vehicle $vehicle): self
-{
-    if ($this->vehicles->removeElement($vehicle)) {
-        // set the owning side to null (unless already changed)
-        if ($vehicle->getUserId() === $this->id) {
-            $vehicle->setUserId(null); // Set the user ID to null in the vehicle entity
+    {
+        if (!$this->vehicles->contains($vehicle)) {
+            $this->vehicles[] = $vehicle;
+            $vehicle->setUserId($this->getId()); // Set the user ID in the vehicle entity
         }
+
+        return $this;
     }
 
-    return $this;
-}
+    public function removeVehicle(Vehicle $vehicle): self
+    {
+        if ($this->vehicles->contains($vehicle)) {
+            // Check if the vehicle belongs to the current user
+            if ($vehicle->getUserId() === $this->getId()) {
+                // Remove the vehicle
+                $this->vehicles->removeElement($vehicle);
+            }
+        }
+    
+        return $this;
+    }
 
 
 }

@@ -56,17 +56,21 @@ class Vehicle
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "Vehicle")]
     #[ORM\Column(nullable: true)]
-    private ?int $userId = null;
+    private ?int $userId;
+
+    public function __construct(int $userId)
+    {
+        $this->userId = $userId;
+    }
 
     public function getUserId(): ?int
     {
         return $this->userId;
     }
 
-    public function setUserId(?int $userId): self
+    public function setUserId(int $userId): self
     {
         $this->userId = $userId;
-
         return $this;
     }
 
