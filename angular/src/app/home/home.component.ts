@@ -9,6 +9,8 @@ import { Vehicle } from '../models/vehicle';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  searchText: string = '';
+
   cities: string[] = [
     'dolnośląskie',
     'kujawsko-pomorskie',
@@ -59,5 +61,14 @@ export class HomeComponent implements OnInit {
     console.log(city);
   }
 
+  searchVehicle() {
+    console.log(this.searchText);
+
+    this.vehicleService.search(this.searchText).subscribe(
+      (response) => {
+        console.log(response);
+      }
+    );
+  }
 
 }

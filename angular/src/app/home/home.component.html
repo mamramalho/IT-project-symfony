@@ -3,12 +3,16 @@
     <form class="search-form">
       <div class="centered-container">
         <mat-form-field class="search-bar" appearance="outline">
-          <mat-icon matPrefix class="search-button">search</mat-icon>
+          <mat-icon matPrefix class="search-button" (click)="searchVehicle()">search</mat-icon>
           <mat-label>Search for cars</mat-label>
-          <input matInput>
+          <input 
+            matInput
+            name="searchInput"
+            [(ngModel)]="searchText"
+            (keyup.enter)="searchVehicle()">
         </mat-form-field>
         <mat-form-field class="location-field" appearance="outline">
-          <mat-icon matPrefix>location_on</mat-icon>
+          <mat-icon matPrefix>location_on</mat-icon>  
           <mat-label>Poland</mat-label>
           <mat-select placeholder="Poland" (selectionChange)="onSelected($event.value)">
             <mat-option *ngFor="let city of cities" [value]="city">

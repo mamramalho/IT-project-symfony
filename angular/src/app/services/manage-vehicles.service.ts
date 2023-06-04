@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Vehicle } from '../models/vehicle';
 import { Observable } from 'rxjs';
@@ -25,5 +25,16 @@ export class ManageVehiclesService {
 
   getVehicle(vehicleId: number): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}/${vehicleId}`);
+  }
+
+  search(text: string): Observable<any> {
+    let params = new HttpParams();
+    let data = {searchText: text};
+
+    for(const key in data) {
+      params = params.append(key, data[key]);
+    }
+ 
+    return this.httpClient.get(`${this.baseUrl}/search`, { params });
   }
 }
