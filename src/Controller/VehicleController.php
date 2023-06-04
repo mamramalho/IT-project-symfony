@@ -65,6 +65,7 @@ class VehicleController extends AbstractController
         $vehicle->setPlate($decoded->plate);
         $vehicle->setKms($decoded->kms);
         $vehicle->setImages($decoded->images);
+        $vehicle->setCity($decoded->city);
         $vehicle->setUserId($userId);
 
         $em->persist($vehicle);
