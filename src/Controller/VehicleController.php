@@ -33,10 +33,6 @@ class VehicleController extends AbstractController
     public function search(VehicleRepository $vehicleRepository, Request $request): Response
     {
         $vehicles = $vehicleRepository->findByNameOrCompany($request->get('text'));
-
-        if (!$vehicles) {
-            return $this->json(null);
-        }
         return $this->json($vehicles);
     }
 

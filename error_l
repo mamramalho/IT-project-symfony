@@ -40,3 +40,5 @@
 [04-Jun-2023 17:10:40 Europe/Lisbon] 2023-06-04T17:10:40+01:00 [critical] Uncaught Error: Class "Algolia\SearchBundle\AlgoliaSearchBundle" not found
 [04-Jun-2023 17:10:51 Europe/Lisbon] 2023-06-04T17:10:51+01:00 [critical] Uncaught Error: Class "Algolia\SearchBundle\AlgoliaSearchBundle" not found
 [04-Jun-2023 20:07:49 Europe/Lisbon] 2023-06-04T20:07:49+01:00 [critical] Uncaught Error: Class "Algolia\SearchBundle\AlgoliaSearchBundle" not found
+[04-Jun-2023 20:11:52 Europe/Lisbon] 2023-06-04T20:11:52+01:00 [critical] Uncaught Error: Class "Algolia\SearchBundle\AlgoliaSearchBundle" not found
+[04-Jun-2023 20:12:27 Europe/Lisbon] 2023-06-04T20:12:27+01:00 [critical] Uncaught Error: Class "Algolia\SearchBundle\AlgoliaSearchBundle" not found

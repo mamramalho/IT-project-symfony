@@ -51,6 +51,14 @@ class VehicleRepository extends ServiceEntityRepository
        ;
    }
 
+   public function getAllUniqueCompanies(): array
+   {
+    return $this->createQueryBuilder('v')
+        ->distinct('v.company')
+        ->getQuery()
+        ->getResult();
+   }
+
 //    public function findOneBySomeField($value): ?Vehicle
 //    {
 //        return $this->createQueryBuilder('v')
