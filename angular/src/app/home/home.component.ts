@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit {
 
   vehicles: Vehicle[] = [];
 
+  isFetching = true;
+
   constructor(
     private authService: AuthService,
     private vehicleService: ManageVehiclesService
@@ -40,6 +42,7 @@ export class HomeComponent implements OnInit {
       (response) => {
         this.vehicles = response as Vehicle[];
         console.log(this.vehicles);
+        this.isFetching = false;
       }
     );
   }

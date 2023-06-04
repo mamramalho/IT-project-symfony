@@ -65,7 +65,7 @@
             </mat-form-field>
             <span>Kilometers</span>
             <mat-form-field appearance="outline">
-                <input matInput formControlName="kms" placeholder="Current vehicle kilometers">
+                <input matInput type="number" formControlName="kms" placeholder="Current vehicle kilometers">
             </mat-form-field>
 
             <span>Images</span>
@@ -84,9 +84,18 @@
             </div>
 
             
-            <button color="primary" mat-raised-button type="submit">
+            <button
+                class="custom-button"
+                mat-raised-button 
+                type="submit" 
+                *ngIf="!requestInProgress; else spinner">
                 Submit
             </button>
+            <ng-template #spinner>
+                <div class="custom-spinner">
+                    <mat-spinner diameter="40" style="margin-top: 15px;"></mat-spinner>
+                </div>
+            </ng-template>
         </form>
     </div>
 </div>

@@ -12,4 +12,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 ::ng-deep mat-form-field {
     color: red;
-  }
+}
+
+.custom-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #038234!important;
+}

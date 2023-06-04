@@ -21,6 +21,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { AnnouncementFormComponent } from './announcement-form/announcement-form.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ManageVehiclesService } from './services/manage-vehicles.service';
+import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ManageVehiclesService } from './services/manage-vehicles.service';
     LoginComponent,
     RegistrationComponent,
     AnnouncementFormComponent,
+    VehicleDetailsComponent,
   ],
   imports: [
     BrowserModule,

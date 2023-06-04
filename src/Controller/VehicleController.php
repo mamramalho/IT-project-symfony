@@ -24,7 +24,8 @@ class VehicleController extends AbstractController
     }
 
     #[Route('/', name: 'vehicle_index', methods: ['GET'])]
-    public function getAllVehicles(VehicleRepository $vehicleRepository): JsonResponse{
+    public function getAllVehicles(VehicleRepository $vehicleRepository): JsonResponse
+    {
         $vehicles = $vehicleRepository->findAll();
         return $this->json($vehicles);
     }
@@ -34,6 +35,13 @@ class VehicleController extends AbstractController
     {
         $vehicles = $vehicleRepository->findByNameOrCompany($request->get('text'));
         return $this->json($vehicles);
+    }
+
+    #[Route('/{id}', name: 'vehicle_find', methods: ['GET'])]
+    public function getVehicle($id, VehicleRepository $vehicleRepository): JsonResponse
+    {
+        $vehicle = $vehicleRepository->find($id);
+        return $this->json($vehicle);
     }
 
     #[Route('/new', name: 'vehicle_new', methods: ['POST'])]

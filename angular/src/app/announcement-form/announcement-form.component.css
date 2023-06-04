@@ -1,6 +1,7 @@
 .centered-div {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .column-form {
@@ -28,4 +29,9 @@ span {
     display: inline-block;
     margin-right: 10px;
     vertical-align: middle;
+}
+
+.custom-button {
+    background-color: #b3a636; /* Specify your desired color here */
+    color: #FFFFFF; /* Specify the text color */
 }
