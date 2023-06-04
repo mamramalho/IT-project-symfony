@@ -27,9 +27,9 @@ export class ManageVehiclesService {
     return this.httpClient.get(`${this.baseUrl}/${vehicleId}`);
   }
 
-  search(text: string): Observable<any> {
+  search(text: string|null, city: string|null): Observable<any> {
     let params = new HttpParams();
-    let data = {searchText: text};
+    let data = {searchText: text, searchCity: city};
 
     for(const key in data) {
       params = params.append(key, data[key]);
