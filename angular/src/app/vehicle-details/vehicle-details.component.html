@@ -1,8 +1,8 @@
-<p *ngIf="vehicle != null; else spinner">
-    {{ vehicle.name }}
-</p>
+<div class="centered-div" *ngIf="vehicle != null; else spinner">
+  <p>CONA</p>
+</div>
 <ng-template #spinner>
     <div class="cust-spin">
       <mat-spinner diameter="100"></mat-spinner>
     </div>
-  </ng-template>
+</ng-template>

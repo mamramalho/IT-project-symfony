@@ -13,6 +13,25 @@ import { Router } from '@angular/router';
 export class AnnouncementFormComponent {
   form: FormGroup;
 
+  areas: string[] = [
+    'dolnośląskie',
+    'kujawsko-pomorskie',
+    'lubelskie',
+    'lubuskie',
+    'łódzkie',
+    'małopolskie',
+    'mazowieckie',
+    'opolskie',
+    'podkarpackie',
+    'podlaskie',
+    'pomorskie',
+    'śląskie',
+    'świętokrzyskie',
+    'warmińsko-mazurskie',
+    'wielkopolskie',
+    'zachodniopomorskie',
+  ];
+
   years: number[] = [];
   colors = [
     { name: 'White', code: '#FFFFFF' },
@@ -130,7 +149,7 @@ export class AnnouncementFormComponent {
       plate,
       kms,
       this.selectedImageUrls,
-      city,
+      city
     );
 
     this.requestInProgress = true;
