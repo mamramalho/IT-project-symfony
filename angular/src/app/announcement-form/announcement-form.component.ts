@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 import { Vehicle } from 'src/app/models/vehicle';
 import { ManageVehiclesService } from '../services/manage-vehicles.service';
 
@@ -37,6 +37,7 @@ export class AnnouncementFormComponent {
   constructor(
     private fb: FormBuilder,
     private vehicleService: ManageVehiclesService,
+    private router: Router
   ) {
     const currentYear = new Date().getFullYear();
     for (let year = currentYear; year >= 1886; year--) {
@@ -115,6 +116,7 @@ export class AnnouncementFormComponent {
       (response) => {
         console.log(response);
         this.requestInProgress = false;
+        this.router.navigate(['']);
       }
     );
   }
