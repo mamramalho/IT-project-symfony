@@ -54,6 +54,9 @@ class Vehicle
     #[ORM\Column(type: Types::ARRAY)]
     private array $images = [];
 
+    #[ORM\Column(length: 255)]
+    private ?string $city = null;
+
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "Vehicle")]
     #[ORM\Column(nullable: true)]
     private ?int $userId;
@@ -232,6 +235,18 @@ class Vehicle
     public function setImages(array $images): self
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
