@@ -48,143 +48,20 @@
 
     <div class="car-container">
       <!-- First Row -->
-      <div class="car-row">
-        <div class="car-preview">
-          <div class="car-image">
-            <img src="../../assets/corvete.jpg" alt="Car Image">
+      <div *ngFor="let vehicle of vehicles; let i = index;">
+        <div class="car-row" *ngIf="i % 3 === 0">
+          <div class="car-preview" *ngFor="let subVehicle of vehicles.slice(i, i + 3)">
+            <div class="car-image">
+              <img src="{{subVehicle.images[0]}}" alt="Car Image">
+            </div>
+            <h2 class="car-title">{{ subVehicle.name }}</h2>
+            <p class="car-description">{{ subVehicle.description }}</p>
+            <button class="view-details-button">View Details</button>
           </div>
-          <h2 class="car-title">Corvette</h2>
-          <p class="car-description">Classic car from 1979</p>
-          <button class="view-details-button">View Details</button>
         </div>
-
-        <div class="car-preview">
-          <div class="car-image">
-            <img src="../../assets/mustang2010.jpg" alt="Car Image">
-          </div>
-          <h2 class="car-title">Mustang</h2>
-          <p class="car-description">Sports car from 2010</p>
-          <button class="view-details-button">View Details</button>
-        </div>
-
-        <div class="car-preview">
-          <div class="car-image">
-            <img src="../../assets/mercedesgt2018.jpg" alt="Car Image">
-          </div>
-          <h2 class="car-title">Mercedes-Benz</h2>
-          <p class="car-description">Luxury car from 2018</p>
-          <button class="view-details-button">View Details</button>
-        </div>
-      </div>
-
-      <!-- Second Row -->
-      <div class="car-row">
-        <div class="car-preview">
-          <div class="car-image">
-            <img src="../../assets/audir8.jpg" alt="Car Image">
-          </div>
-          <h2 class="car-title">Audi</h2>
-          <p class="car-description">Luxury car from 2019</p>
-          <button class="view-details-button">View Details</button>
-        </div>
-
-        <div class="car-preview">
-          <div class="car-image">
-            <img src="../../assets/audir8.jpg" alt="Car Image">
-          </div>
-          <h2 class="car-title">Audi</h2>
-          <p class="car-description">Luxury car from 2019</p>
-          <button class="view-details-button">View Details</button>
-        </div>
-
-        <!-- Add more cars here -->
       </div>
     </div>
   </div>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f5f5f5;
-    }
-
-    .page-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .car-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 4px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .car-row {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .car-preview {
-      width: 30%;
-      border: 1px solid #ccc;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-
-    .car-preview:hover {
-      transform: scale(1.1);
-    }
-
-    .car-preview img {
-      width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-    }
-
-    .car-title {
-      text-align: center;
-      margin: 0;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .car-description {
-      text-align: center;
-      margin: 0;
-      font-size: 14px;
-      color: #666;
-    }
-
-    .view-details-button {
-      background-color: rgba(91, 79, 10, 0.601);
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .view-details-button:hover {
-      background-color: #000000;
-    }
-  </style>
 </body>
 
 </html>

@@ -3,18 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Vehicle;
-use App\Form\VehicleType;
 use App\Repository\VehicleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 #[Route('/api/vehicle')]
 class VehicleController extends AbstractController
@@ -27,20 +24,17 @@ class VehicleController extends AbstractController
     }
 
     #[Route('/', name: 'vehicle_index', methods: ['GET'])]
-    public function index(VehicleRepository $vehicleRepository): JsonResponse
-    {
-        $user = $this->security->getUser();
-        $vehicles = $vehicleRepository->findBy(['user' => $user]);
-
-        return new JsonResponse($vehicles);
+    public function getAllVehicles(VehicleRepository $vehicleRepository): JsonResponse{
+        $vehicles = $vehicleRepository->findAll();
+        return $this->json($vehicles);
     }
 
     #[Route('/new', name: 'vehicle_new', methods: ['POST'])]
-    public function new(ManagerRegistry $doctrine, Request $request, $security): JsonResponse
+    public function new(ManagerRegistry $doctrine, Request $request): JsonResponse
     {
 
         //AQUI problem retribuing the userId!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        $user = $security->getUser();
+        $user = $this->security->getUser();
         $userId = $user->getId();
 
         $vehicle = new Vehicle($userId);
@@ -65,6 +59,7 @@ class VehicleController extends AbstractController
         $vehicle->setPlate($decoded->plate);
         $vehicle->setKms($decoded->kms);
         $vehicle->setImages($decoded->images);
+        $vehicle->setUserId($userId);
 
         $em->persist($vehicle);
         $em->flush();

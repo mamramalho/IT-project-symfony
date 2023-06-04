@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ManageVehiclesService {
 
-  private baseUrl = 'http://localhost:8888/api'
+  private baseUrl = 'http://localhost:8888/api/vehicle'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -16,10 +16,10 @@ export class ManageVehiclesService {
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.httpClient.post(this.baseUrl + '/vehicle/new', vehicle, { headers },);
+    return this.httpClient.post(this.baseUrl + '/new', vehicle, { headers },);
   }
 
   getVehicles(): Observable<any> {
-    return this.httpClient.get(this.baseUrl + '/vehicle');
+    return this.httpClient.get(this.baseUrl + '/');
   }
 }
