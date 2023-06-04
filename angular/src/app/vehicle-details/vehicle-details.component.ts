@@ -19,14 +19,12 @@ export class VehicleDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    /*this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(params => {
       this.vehicleService.getVehicle(+params.get('id')).subscribe(
         (response) => {
           this.vehicle = response as Vehicle;
         }
       );
-    });*/
-
-    
+    });
   }
 }

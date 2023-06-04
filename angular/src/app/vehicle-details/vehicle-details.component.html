@@ -1,5 +1,59 @@
-<div class="centered-div" *ngIf="vehicle != null; else spinner">
-  <p>CONA</p>
+<div *ngIf="vehicle != null; else spinner">
+  <h1 class="title">{{vehicle.name}}</h1>
+  <div class="details">
+    <div class="specs">
+      <div class="price-container">
+        Price: {{vehicle.price}}zl
+      </div>
+      <div class="specs-container">
+        <div class="spec-name">
+          <p>Brand</p>
+          <p>Type</p>
+          <p>Model</p>
+          <p>Year</p>
+          <p>Register Year</p>
+          <p>Color</p>
+          <p>Fuel</p>
+          <p>Plate</p>
+          <p>Kms</p>
+          <p>Region</p>
+        </div>
+        <div class="spec">
+          <p>{{vehicle.company}}</p>
+          <p>{{vehicle.type}}</p>
+          <p>{{vehicle.model}}</p>
+          <p>{{vehicle.year}}</p>
+          <p>{{vehicle.registerYear}}</p>
+          <p>{{vehicle.color}}</p>
+          <p>{{vehicle.fuel}}</p>
+          <p>{{vehicle.plate}}</p>
+          <p>{{vehicle.kms}}</p>
+          <p>{{vehicle.city}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="image-container">
+      <div class="car-image">
+        <c-carousel>
+          <c-carousel-indicators></c-carousel-indicators>
+          <c-carousel-inner>
+            <c-carousel-item *ngFor="let image of vehicle.images">
+              <img
+                [src]="image"
+                class="d-block w-100"
+                loading="lazy" />
+            </c-carousel-item>
+          </c-carousel-inner>
+          <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+          <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+        </c-carousel>
+      </div>
+    </div>
+  </div>
+  <div class="description-container">
+    <h2>Description</h2>
+    <p>ESTE CARRO NAO VALE UNS TOMATES DE UM GATO</p>
+  </div>
 </div>
 <ng-template #spinner>
     <div class="cust-spin">

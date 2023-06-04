@@ -10,6 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { CarouselModule } from '@coreui/angular';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -47,7 +48,8 @@ import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.compo
     HttpClientModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    CarouselModule,
   ],
   providers: [
     AuthService,
