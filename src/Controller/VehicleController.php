@@ -33,11 +33,8 @@ class VehicleController extends AbstractController
     #[Route('/search', name: 'vehicle_search', methods: ['GET'])]
     public function search(VehicleRepository $vehicleRepository, Request $request): Response
     {
-        //como é GET tem de ser feito assim com queryParams
         $request->query->get('searchText');
-
-        //aqui sai lista vazia
-        $vehicles = $vehicleRepository->findByNameOrCompany();
+        $vehicles = $vehicleRepository->findByNameOrCompany($request);
         return $this->json($vehicles);
     }
 
@@ -76,6 +73,7 @@ class VehicleController extends AbstractController
         $vehicle->setPlate($decoded->plate);
         $vehicle->setKms($decoded->kms);
         $vehicle->setImages($decoded->images);
+        $vehicle->setCity($decoded->city);
         $vehicle->setUserId($userId);
 
         $em->persist($vehicle);
