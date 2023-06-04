@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { using } from 'rxjs';
+import { ManageVehiclesService } from '../services/manage-vehicles.service';
+import { Vehicle } from '../models/vehicle';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -8,13 +10,21 @@ import { using } from 'rxjs';
   styleUrls: ['./vehicle-details.component.css']
 })
 export class VehicleDetailsComponent implements OnInit {
-  vehicleId: number;
 
-  constructor(private route: ActivatedRoute) { }
+  vehicle: Vehicle;
+
+  constructor(
+    private route: ActivatedRoute,
+    private vehicleService: ManageVehiclesService
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.vehicleId = +params.get('id');
+      this.vehicleService.getVehicle(+params.get('id')).subscribe(
+        (response) => {
+          this.vehicle = response as Vehicle;
+        }
+      );
     });
   }
 }

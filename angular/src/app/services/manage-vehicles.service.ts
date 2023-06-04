@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ManageVehiclesService {
-
+  
   private baseUrl = 'http://localhost:8888/api/vehicle'
 
   constructor(private httpClient: HttpClient) { }
@@ -21,5 +21,9 @@ export class ManageVehiclesService {
 
   getVehicles(): Observable<any> {
     return this.httpClient.get(this.baseUrl + '/');
+  }
+
+  getVehicle(vehicleId: number): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}/${vehicleId}`);
   }
 }

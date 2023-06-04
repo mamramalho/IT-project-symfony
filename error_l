@@ -36,3 +36,4 @@
 [03-Jun-2023 20:49:11 Europe/Lisbon] 2023-06-03T20:49:11+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
 [03-Jun-2023 20:49:11 Europe/Lisbon] 2023-06-03T20:49:11+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
 [03-Jun-2023 20:49:31 Europe/Lisbon] 2023-06-03T20:49:31+01:00 [critical] Uncaught Error: Class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" not found
+[04-Jun-2023 17:52:06 Europe/Lisbon] 2023-06-04T17:52:06+01:00 [info] User Deprecated: The "Monolog\Logger" class is considered final. It may change without further notice as of its next major version. You should not extend it from "Symfony\Bridge\Monolog\Logger".

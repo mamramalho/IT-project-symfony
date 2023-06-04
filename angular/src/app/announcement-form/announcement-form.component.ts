@@ -111,7 +111,7 @@ export class AnnouncementFormComponent {
       this.selectedImageUrls,
     );
 
-    //this.requestInProgress = true;
+    this.requestInProgress = true;
 
     this.vehicleService.addVehicle(vehicle).subscribe(
       (response) => {
