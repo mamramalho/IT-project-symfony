@@ -5,7 +5,10 @@ namespace App\Entity;
 use App\Repository\VehicleRepository;
 use Doctrine\DBAL\Types\Types;
 use App\Entity\User;
+use App\Entity\Review;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: VehicleRepository::class)]
 class Vehicle
@@ -61,9 +64,11 @@ class Vehicle
     #[ORM\Column(nullable: true)]
     private ?int $userId;
 
+
     public function __construct(int $userId)
     {
         $this->userId = $userId;
+        /* $this->reviews = new ArrayCollection(); */
     }
 
     public function getUserId(): ?int
@@ -250,4 +255,5 @@ class Vehicle
 
         return $this;
     }
+
 }
