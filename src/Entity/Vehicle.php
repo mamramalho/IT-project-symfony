@@ -64,11 +64,14 @@ class Vehicle
     #[ORM\Column(nullable: true)]
     private ?int $userId;
 
+    #[ORM\OneToMany(targetEntity:"App\Entity\Review", mappedBy:"vehicle")]
+    private $reviews;
+
 
     public function __construct(int $userId)
     {
         $this->userId = $userId;
-        /* $this->reviews = new ArrayCollection(); */
+        $this->reviews = new ArrayCollection();
     }
 
     public function getUserId(): ?int
@@ -252,6 +255,37 @@ class Vehicle
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->setVehicle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->contains($review)) {
+            $this->reviews->removeElement($review);
+            // set the owning side to null (unless already changed)
+            if ($review->getVehicle() === $this) {
+                $review->setVehicle(null);
+            }
+        }
 
         return $this;
     }

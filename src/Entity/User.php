@@ -39,8 +39,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity:"App\Entity\Vehicle", mappedBy:"User", orphanRemoval:true)]
     private $vehicles;
 
-    #[ORM\OneToMany(targetEntity:"App\Entity\Review", mappedBy:"User", orphanRemoval:true)]
-    private $review;
+    #[ORM\OneToMany(targetEntity:"App\Entity\Review", mappedBy:"user")]
+    private $reviews;
 
     public function getId(): ?int
     {
@@ -133,7 +133,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->vehicles = new ArrayCollection();
-        $this->review = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     /**
@@ -167,21 +167,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    //
-
     /**
      * @return Collection|Review[]
      */
-    public function getReview(): Collection
+    public function getReviews(): Collection
     {
-        return $this->review;
+        return $this->reviews;
     }
 
     public function addReview(Review $review): self
     {
-        if (!$this->review->contains($review)) {
-            $this->review[] = $review;
-            $review->setUserId($this->getId());
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->setUser($this);
         }
 
         return $this;
@@ -189,15 +187,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeReview(Review $review): self
     {
-        if ($this->review->contains($review)) {
-            if ($review->getUserId() === $this->getId()) {
-                $this->review->removeElement($review);
+        if ($this->reviews->contains($review)) {
+            $this->reviews->removeElement($review);
+            // set the owning side to null (unless already changed)
+            if ($review->getUser() === $this) {
+                $review->setUser(null);
             }
-        }
-    
-        return $this;
     }
 
-
+    return $this;
+}
 
 }

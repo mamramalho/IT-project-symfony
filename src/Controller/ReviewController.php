@@ -3,89 +3,103 @@
 namespace App\Controller;
 
 use App\Entity\Review;
+use App\Entity\Vehicle;
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\SecurityBundle\Security;
 
-#[Route('/api/review/')]
+#[Route('/api/review')]
 class ReviewController extends AbstractController
 {
     private $security;
+    private $entityManager;
+    private $reviewRepository;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security, EntityManagerInterface $entityManager, ReviewRepository $reviewRepository)
     {
         $this->security = $security;
-    }
-
-/*     #[Route('/', name: 'review_index', methods: ['GET'])]
-    public function getAllReview(ReviewRepository $reviewRepository, Request $request): JsonResponse
-    {
-        $review = $reviewRepository->search($request->query->get('searchText'), $request->query->get('searchCity'));
-        return $this->json($review);
-    } */
-
-    #[Route('/{id}', name: 'review_find', methods: ['GET'])]
-    public function getReview($vehicleId, ReviewRepository $reviewRepository): JsonResponse
-    {
-        $review = $reviewRepository->find($vehicleId);
-        return $this->json($review);
+        $this->entityManager = $entityManager;
+        $this->reviewRepository = $reviewRepository;
     }
 
     #[Route('/new', name: 'review_new', methods: ['POST'])]
-    public function new(ManagerRegistry $doctrine, Request $request): JsonResponse
+    public function createReview(Request $request): JsonResponse
     {
-        $user = $this->security->getUser();
-        $userId = $user->getId();
-        $review = new Review($userId);
+        $userId = $this->security->getUser()->getId();
+        $vehicleId = $request->request->get('vehicleId');
+        $content = $request->request->get('content');
 
-        $vehicle = $this->security->getVehicle();
-        $vehicleId = $vehicle->getId();
-        $review = new Review($vehicleId);
+        $vehicle = $this->entityManager->getRepository(Vehicle::class)->find($vehicleId);
 
-        $em = $doctrine->getManager();
-        $decoded = json_decode($request->getContent());
-
-
-        if ($decoded->description != null) {
-            $review->setDescription($decoded->description);
-        }
-        $review->setUserId($userId);
-        $review->setVehicleId($vehicleId);
-
-        $em->persist($review);
-        $em->flush();
-
-        $responseData = [
-            'success' => true,
-            'message' => 'Review added successfully'
-        ];
-
-        return new JsonResponse($responseData);
-    }
-
-
-    #[Route('/{id}', name: 'review_show', methods: ['GET'])]
-    public function show(Review $review): Response
-    {
-        return $this->render('review/show.html.twig', [
-            'review' => $review,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'review_delete', methods: ['POST'])]
-    public function delete(Request $request, Review $review, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$review->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($review);
-            $entityManager->flush();
+        if (!$vehicle) {
+            return new JsonResponse(['error' => 'Vehicle not found.'], 404);
         }
 
-        return $this->redirectToRoute('/');
+        // Check if the user has already reviewed the vehicle
+        $existingReview = $this->reviewRepository->findOneBy(['user' => $userId, 'vehicle' => $vehicleId]);
+
+        if ($existingReview) {
+            return new JsonResponse(['error' => 'User has already reviewed this vehicle.'], 400);
+        }
+
+        $review = new Review();
+        $review->setUser($userId);
+        $review->setVehicle($vehicle);
+        $review->setContent($content);
+
+        $this->entityManager->persist($review);
+        $this->entityManager->flush();
+
+        return new JsonResponse(['success' => true, 'message' => 'Review created successfully.']);
+    }
+
+    #[Route('/{id}', name: 'review_edit', methods: ['PUT'])]
+    public function updateReview($id, Request $request): JsonResponse
+    {
+        $userId = $this->security->getUser()->getId();
+        $content = $request->request->get('content');
+
+        $review = $this->reviewRepository->find($id);
+
+        if (!$review) {
+            return new JsonResponse(['error' => 'Review not found.'], 404);
+        }
+
+        // Check if the review belongs to the logged-in user
+        if ($review->getUser() !== $userId) {
+            return new JsonResponse(['error' => 'You are not authorized to update this review.'], 403);
+        }
+
+        $review->setContent($content);
+
+        $this->entityManager->flush();
+
+        return new JsonResponse(['success' => true, 'message' => 'Review updated successfully.']);
+    }
+
+    #[Route('/{id}', name: 'review_delete', methods: ['DELETE'])]
+    public function deleteReview($id): JsonResponse
+    {
+        $userId = $this->security->getUser()->getId();
+
+        $review = $this->reviewRepository->find($id);
+
+        if (!$review) {
+            return new JsonResponse(['error' => 'Review not found.'], 404);
+        }
+
+        // Check if the review belongs to the logged-in user
+        if ($review->getUser() !== $userId) {
+            return new JsonResponse(['error' => 'You are not authorized to delete this review.'], 403);
+        }
+
+        $this->entityManager->remove($review);
+        $this->entityManager->flush();
+
+        return new JsonResponse(['success' => true, 'message' => 'Review deleted successfully.']);
     }
 }

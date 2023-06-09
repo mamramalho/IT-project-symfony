@@ -3,72 +3,66 @@
 namespace App\Entity;
 
 use App\Repository\ReviewRepository;
-use Doctrine\DBAL\Types\Types;
-use App\Entity\User;
-use App\Entity\Vehicle;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
+#[ORM\Table(name: '`review`')]
 class Review
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Id()]
+    #[ORM\GeneratedValue()]
+    #[ORM\Column(type:"integer")]
+    private $id;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
+    #[ORM\ManyToOne(targetEntity:"App\Entity\User")]
+    #[ORM\JoinColumn(nullable:false)]
+    private $user;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "Review")]
-    #[ORM\Column(nullable: true)]
-    private ?int $userId;
+    #[ORM\ManyToOne(targetEntity:"App\Entity\Vehicle", inversedBy:"reviews")]
+    #[ORM\JoinColumn(nullable:false)]
+    private $vehicle;
 
-    #[ORM\ManyToOne(targetEntity: Vehicle::class, inversedBy: "Review")]
-    #[ORM\Column(nullable: true)]
-    private ?int $vehicleId;
-
-    public function __construct(int $userId, int $vehicleId)
-    {
-        $this->userId = $userId;
-        $this->vehicleId = $vehicleId;
-    }
-
-    public function getVehicleId(): ?int
-    {
-        return $this->vehicleId;
-    }
-
-    public function setVehicleId(int $vehicleId): self
-    {
-        $this->vehicleId = $vehicleId;
-        return $this;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(int $userId): self
-    {
-        $this->userId = $userId;
-        return $this;
-    }
-
+    #[ORM\Column(type:"text")]
+    private $content;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDescription(): ?string
+    public function getUser(): ?User
     {
-        return $this->description;
+        return $this->user;
     }
 
-    public function setDescription(string $description): self
+    public function setUser(?User $user): self
     {
-        $this->description = $description;
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getVehicle(): ?Vehicle
+    {
+        return $this->vehicle;
+    }
+
+    public function setVehicle(?Vehicle $vehicle): self
+    {
+        $this->vehicle = $vehicle;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }

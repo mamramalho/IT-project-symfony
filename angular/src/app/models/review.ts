@@ -1,5 +1,5 @@
 export class Review {
     constructor(
-        public description : string,
+        public content : string,
     ) {}
 }
