@@ -11,7 +11,6 @@ import { GalleryItem, ImageItem } from 'ng-gallery';
   selector: 'app-vehicle-details',
   templateUrl: './vehicle-details.component.html',
   styleUrls: ['./vehicle-details.component.css'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class VehicleDetailsComponent implements OnInit {
 

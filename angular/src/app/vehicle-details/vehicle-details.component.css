@@ -21,7 +21,7 @@
   padding-left: 110px;
   padding-top: 40px;
   font-weight: bolder;
-  font-size: 100px;
+  font-size: 35px;
 }
 
 .details {
@@ -46,7 +46,8 @@
   width: 700px; 
   height: 100px; 
   position: relative;
-  margin-left: 120px;
+  margin-left: 100px;
+  margin-right: 40px;
   margin-top: 5px;
 }
 

@@ -7,7 +7,6 @@ import { Vehicle } from '../models/vehicle';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
   searchText: string = '';
