@@ -1,17 +1,11 @@
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-::ng-deep .mat-form-field-label {
-    color: red;
-}
-
-.mat-input-element {
-    color: blue;
-}
-
-::ng-deep mat-form-field {
-    color: red;
+body { 
+    margin: 0; 
+    font-family: Roboto, 
+    "Helvetica Neue", 
+    sans-serif;
+    background-color: #f5f5f5;
 }
 
 .custom-spinner {
@@ -21,6 +15,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     height: 100%;
 }
 
-.mat-progress-spinner circle, .mat-spinner circle {
-    stroke: #038234!important;
+.search-bar {
+    width: 1000px;
+    height: 55px;
 }
+
+.mat-mdc-text-field-wrapper {
+    background-color:white!important;
+}
+

@@ -11,6 +11,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from '@coreui/angular';
+import { MatTableModule } from '@angular/material/table';
+import { GalleryModule, GALLERY_CONFIG } from  'ng-gallery';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -50,6 +52,8 @@ import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.compo
     MatSelectModule,
     FormsModule,
     CarouselModule,
+    MatTableModule,
+    GalleryModule,
   ],
   providers: [
     AuthService,
@@ -58,6 +62,13 @@ import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.compo
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
+    },
+    {
+      provide: GALLERY_CONFIG,
+      useValue: {
+        dots: true,
+        imageSize: 'cover'
+      }
     }
   ],
   bootstrap: [AppComponent]

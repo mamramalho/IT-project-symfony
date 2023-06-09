@@ -156,9 +156,12 @@ export class AnnouncementFormComponent {
 
     this.vehicleService.addVehicle(vehicle).subscribe(
       (response) => {
-        console.log(response);
         this.requestInProgress = false;
         this.router.navigate(['']);
+      },
+      (error) => {
+        console.log(error);
+        this.requestInProgress = false;
       }
     );
   }

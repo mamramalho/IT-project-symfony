@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ManageVehiclesService } from '../services/manage-vehicles.service';
 import { Vehicle } from '../models/vehicle';
@@ -6,7 +6,8 @@ import { Vehicle } from '../models/vehicle';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
   searchText: string = '';

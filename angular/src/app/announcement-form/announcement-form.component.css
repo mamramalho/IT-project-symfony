@@ -35,3 +35,10 @@ span {
     background-color: #b3a636; /* Specify your desired color here */
     color: #FFFFFF; /* Specify the text color */
 }
+
+.description-field {
+    width: 1000px;
+    margin-bottom: 20px;
+    background-color: white;
+    height: 80px;
+}

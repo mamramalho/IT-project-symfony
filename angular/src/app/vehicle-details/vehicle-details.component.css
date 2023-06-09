@@ -5,16 +5,27 @@
     height: 100%;
     margin-top: 170px;
 }
+
+.announcent-container {
+  background-color: white;
+  margin: 0 auto;
+  width: 90%;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  margin-top: 20px;
+}
  
 .title {
-  margin-left: 140px;
-  margin-top: 40px;
-  font-weight: bold;
-  font-size: xx-large;
+  padding-left: 110px;
+  padding-top: 40px;
+  font-weight: bolder;
+  font-size: 100px;
 }
 
 .details {
-  margin-left: 150px;
+  margin-left: 110px;
   margin-top: 40px;
   display: flex;
 }
@@ -32,11 +43,11 @@
 }
 
 .image-container {
-  width: 700px; /* Replace with your desired width */
-  height: 500px; /* Replace with your desired height */
+  width: 700px; 
+  height: 100px; 
   position: relative;
-  margin-left: 200px;
-  margin-top: 30px;
+  margin-left: 120px;
+  margin-top: 5px;
 }
 
 .car-image {
@@ -49,22 +60,21 @@
   display: block;
 }
 
-.specs-container {
-  display: flex;
-  margin-top: 40px;
+.mat-mdc-table {
+  margin-top: 35px;
+  background-color: rgb(239, 239, 239);
 }
 
-.spec-name {
-  display: block;
-  font-weight: bold;
+.mat-mdc-table .mdc-data-table__row {
+  height: 35px!important;
 }
 
-.spec {
-  display: block;
-  margin-left: 150px;
+.mat-mdc-table .mdc-data-table__cell.value {
+  padding-left: 190px;
 }
 
 .description-container {
-  margin-left: 140px;
-  margin-top: -30px;
+  margin-left: 110px;
+  margin-top: 40px;
+  padding-bottom: 40px;
 }

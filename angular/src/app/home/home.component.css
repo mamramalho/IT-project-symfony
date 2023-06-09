@@ -22,19 +22,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.centered-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.search-bar {
-    width: 1000px;
-    height: 55px;
-    background-color: white;
-    border-radius: 0px;
+    background-color: #eeeeee;
 }
 
 .location-field {
@@ -56,57 +44,68 @@
 .car-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   gap: 20px;
-  padding: 20px;
-  background-color: #fff;
-  margin-left: 15px;
-  margin-right: 15px;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  margin-left: 110px;
 }
 
 .car-row {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   gap: 20px;
+  margin-left: 20px;
 }
 
 .car-preview {
-  width: 30%;
+  width: 300px;
+  height: 450px;
   border: 1px solid #ccc;
+  background-color: white;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .car-preview:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .car-preview img {
-  width: 100%;
-  height: auto;
+  width: 270px;
+  height: 250px;
+  object-fit: cover;
+  align-self: center;
+  margin-left: 5px;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 
 .car-title {
-  text-align: center;
-  margin: 0;
+  text-align: start;
+  padding-left: 5px;
   font-size: 18px;
   font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 3px;
 }
 
-.car-description {
-  text-align: center;
-  margin: 0;
+.car-area {
+  text-align: start;
+  padding-left: 5px;
   font-size: 14px;
   color: #666;
+}
+
+.car-price {
+  text-align: start;
+  padding-left: 5px;
 }
 
 .view-details-button {
@@ -129,6 +128,6 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-top: 170px;
+  margin-top: 250px;
 }
 
