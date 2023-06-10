@@ -6,15 +6,23 @@
     margin-top: 170px;
 }
 
-.announcent-container {
+.announcement-container {
   background-color: white;
   margin: 0 auto;
+  margin-bottom: 20px;
   width: 90%;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
 }
 
+.chat-button {
+  background-color: black;
+  color: white;
+  width: 100px;
+}
+
 .content {
   margin-top: 20px;
+  padding-bottom: 20px;
 }
  
 .title {
@@ -22,6 +30,19 @@
   padding-top: 40px;
   font-weight: bolder;
   font-size: 35px;
+}
+
+.announcer-container {
+  margin-left: 110px;
+  background-color: rgb(239, 239, 239);
+  width: 300px;
+  height: 120px;
+  border-radius: 10px;
+}
+
+.announcer-content {
+  margin-left: 15px;
+  padding-top: 10px;
 }
 
 .details {
@@ -40,6 +61,7 @@
   align-items: center;
   text-align: center;
   font-size: larger;
+  border-radius: 5px;
 }
 
 .image-container {
@@ -49,6 +71,7 @@
   margin-left: 100px;
   margin-right: 40px;
   margin-top: 5px;
+  border-radius: 10px;
 }
 
 .car-image {

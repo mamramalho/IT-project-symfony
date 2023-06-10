@@ -14,3 +14,7 @@
 .custom-cursor:hover {
     cursor: pointer;
 }
+
+.registration-button {
+    background-color: rgba(133, 115, 16, 0.601);
+}

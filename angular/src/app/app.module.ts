@@ -13,29 +13,30 @@ import { FormsModule } from '@angular/forms';
 import { CarouselModule } from '@coreui/angular';
 import { MatTableModule } from '@angular/material/table';
 import { GalleryModule, GALLERY_CONFIG } from  'ng-gallery';
+import { MatDialogModule } from '@angular/material/dialog'; 
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthComponent } from './auth/auth.component';
-import { LoginComponent } from './auth/login/login.component';
+import { LoginComponent } from './auth-dialog/login/login.component';
 import { AuthService } from './services/auth.service';
-import { RegistrationComponent } from './auth/registration/registration.component';
+import { RegistrationComponent } from './auth-dialog/registration/registration.component';
 import { AnnouncementFormComponent } from './announcement-form/announcement-form.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ManageVehiclesService } from './services/manage-vehicles.service';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
+import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AuthComponent,
     LoginComponent,
     RegistrationComponent,
     AnnouncementFormComponent,
     VehicleDetailsComponent,
+    AuthDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +55,7 @@ import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.compo
     CarouselModule,
     MatTableModule,
     GalleryModule,
+    MatDialogModule,
   ],
   providers: [
     AuthService,

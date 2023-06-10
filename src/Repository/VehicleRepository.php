@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Vehicle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use function PHPUnit\Framework\equalTo;
+use function PHPUnit\Framework\equalToIgnoringCase;
 
 /**
  * @extends ServiceEntityRepository<Vehicle>
@@ -29,8 +31,8 @@ class VehicleRepository extends ServiceEntityRepository
              $queryBuilder->andWhere('v.name = :text OR v.company = :text OR v.model = :text')
                  ->setParameter('text', $text);
         }
- 
-         if ($city) {
+
+         if ($city && $city != 'Poland') {
              $queryBuilder->andWhere('v.city = :city')
                  ->setParameter('city', $city);
          }

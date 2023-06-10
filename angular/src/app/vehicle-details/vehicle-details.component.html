@@ -1,6 +1,6 @@
-<div class="announcent-container" *ngIf="vehicle != null; else spinner">
+<div class="announcement-container" *ngIf="announcer != null; else spinner">
   <div class="content">
-    <h1 class="title"><b>{{vehicle.name}}</b></h1>
+    <h1 class="title"><b>{{ vehicle.name }}</b></h1>
     <div class="details">
       <div class="specs">
         <div class="price-container">
@@ -21,12 +21,24 @@
         </table>
       </div>
       <div class="image-container">
-        <gallery [items]="images" thumbPosition="right" imageSize="cover" style="height: 440px;"></gallery>
+        <gallery [items]="images" thumbPosition="right" imageSize="cover" style="height: 440px; border-radius: 10px;"></gallery>
       </div>
     </div>
     <div class="description-container">
       <h2>Description</h2>
       <p>{{vehicle.description}}</p>
+    </div>
+    <div class="announcer-container">
+      <div class="announcer-content">
+        <h4 style="margin-bottom: -1px;"><b>Announcer</b></h4>
+        <p>{{ announcer.email }}</p>
+        <button
+          class="chat-button"
+          mat-raised-button
+          (click)="openChat()">
+          Chat
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,27 @@
+.tab-container {
+    margin: 20px;
+}
+
+.custom-tab-group {
+    margin: 15px 15px;
+}
+
+.margin-content {
+    margin-top: 20px;
+}
+
+.mat-mdc-tab.mdc-tab--active:focus .mdc-tab__text-label {
+    color: rgba(133, 115, 16, 0.601)!important;
+}
+
+.mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
+    color: rgba(133, 115, 16, 0.601)!important;
+}
+
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: rgba(133, 115, 16, 0.601)!important;
+}
+
+.mat-mdc-tab .mdc-tab-indicator__content--underline {
+    border-color: rgba(133, 115, 16, 0.601)!important;
+}

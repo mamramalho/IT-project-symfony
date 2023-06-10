@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  @Output() doneLogin = new EventEmitter<void>();
+
   form: FormGroup;
 
   hidePw = true;
@@ -40,7 +42,8 @@ export class LoginComponent {
     this.authService.login(credentials).subscribe((response) => {
       console.log(response);
       this.requestInProgress = false;
-      this.router.navigate(['']);
+      this.doneLogin.emit();
+      //this.router.navigate(['']);
     });
   }
 }

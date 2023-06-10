@@ -60,12 +60,13 @@ export class HomeComponent implements OnInit {
   
   onSelected(city: string): void {
     this.city = city;
-    this.searchVehicle()
+    this.searchVehicle();
   }
 
   searchVehicle() {
-    console.log(this.searchText);
-
+    if (this.city == '') {
+      this.city = 'Poland';
+    }
     this.vehicleService.search(this.searchText, this.city).subscribe(
       (response) => {
         this.vehicles = response as Vehicle[];

@@ -15,5 +15,6 @@ export class Vehicle {
         public images: string[],
         public city: string,
         public id?: number,
+        public userId?: number,
     ) {}
 }

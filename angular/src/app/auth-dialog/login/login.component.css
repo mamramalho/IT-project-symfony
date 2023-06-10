@@ -26,3 +26,7 @@
     cursor: pointer;
     color: rgb(113, 113, 113);
 }
+
+.login-button {
+    background-color: rgba(133, 115, 16, 0.601);
+}

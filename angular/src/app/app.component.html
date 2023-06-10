@@ -1,12 +1,21 @@
 <div class="custom-background">
     <mat-toolbar>
         <mat-toolbar-row class="main-row">
-            <img src="../../assets/logo.png" alt="Logo" height="50" viewbox="0 0 351 100" style="cursor: pointer" routerLink="/">
+            <img 
+                src="../../assets/logo.png" 
+                alt="Logo" 
+                height="50" 
+                viewbox="0 0 351 100" 
+                style="cursor: pointer"
+                routerLink="/">
             <span class="spacer"></span>
             <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button class="logout-button">
                 <mat-icon>logout</mat-icon>
             </button>
-            <button mat-icon-button class="my-account-button" routerLink="/auth">
+            <button 
+                mat-icon-button 
+                class="my-account-button"
+                (click)="openAuthDialog()">
                 <mat-icon>person</mat-icon>
             </button>
             <button mat-raised-button routerLink="/announce">Announce and Sell</button>

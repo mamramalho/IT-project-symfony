@@ -6,6 +6,8 @@ import { Vehicle } from '../models/vehicle';
 import { Review } from '../models/review';
 
 import { GalleryItem, ImageItem } from 'ng-gallery';
+import { ManageUsersService } from '../services/manage-users.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -15,7 +17,7 @@ import { GalleryItem, ImageItem } from 'ng-gallery';
 export class VehicleDetailsComponent implements OnInit {
 
   vehicle: Vehicle;
-  review: Review;
+  announcer: User;
 
   specs = [];
   images = [];
@@ -23,40 +25,48 @@ export class VehicleDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private vehicleService: ManageVehiclesService,
-    private reviewService: ManageReviewService,
+    private userService: ManageUsersService,
   ) { }
 
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.vehicleService.getVehicle(+params.get('id')).subscribe(
-        (response) => {
-          this.vehicle = response as Vehicle;
+  async ngOnInit() {
+    this.route.paramMap.subscribe(async (params) => {
+      const id = +params.get('id');
+  
+      try {
+        const response = await this.vehicleService.getVehicle(id).toPromise();
+        this.vehicle = response as Vehicle;
+  
+        this.specs = [
+          { spec: 'Brand', value: this.vehicle.company },
+          { spec: 'Type', value: this.vehicle.type },
+          { spec: 'Model', value: this.vehicle.model },
+          { spec: 'Year', value: this.vehicle.year },
+          { spec: 'Register Year', value: this.vehicle.registerYear },
+          { spec: 'Color', value: this.vehicle.color },
+          { spec: 'Fuel', value: this.vehicle.fuel },
+          { spec: 'Plate', value: this.vehicle.plate },
+          { spec: 'Kilometers', value: this.vehicle.kms },
+          { spec: 'Region', value: this.vehicle.city },
+        ];
+  
+        for (const src of this.vehicle.images) {
+          this.images.push(new ImageItem({ src: src, thumb: src }));
+        }
 
-          this.specs = [
-            { spec: 'Brand', value: this.vehicle.company },
-            { spec: 'Type', value: this.vehicle.type },
-            { spec: 'Model', value: this.vehicle.model },
-            { spec: 'Year', value: this.vehicle.year },
-            { spec: 'Register Year', value: this.vehicle.registerYear },
-            { spec: 'Color', value: this.vehicle.color },
-            { spec: 'Fuel', value: this.vehicle.fuel },
-            { spec: 'Plate', value: this.vehicle.plate },
-            { spec: 'Kilometers', value: this.vehicle.kms },
-            { spec: 'Region', value: this.vehicle.city },
-          ];
-
-          for(let src of this.vehicle.images) {
-            this.images.push(
-              new ImageItem({ src: src, thumb: src })
-            );
+        this.userService.getUser(this.vehicle.userId).subscribe(
+          (response) => {
+            this.announcer = response as User;
           }
-        }
-      );
-      this.reviewService.getReview(+params.get('id')).subscribe(
-        (response) => {
-          this.review = response as Review;
-        }
-      );
+        );
+
+      } catch (error) {
+        // Handle any errors that occurred during the async operation
+        console.error(error);
+      }
     });
+  }
+
+  openChat() {
+    //TODO
   }
 }

@@ -15,6 +15,7 @@
           <mat-icon matPrefix>location_on</mat-icon>  
           <mat-label>Poland</mat-label>
           <mat-select placeholder="Poland" (selectionChange)="onSelected($event.value)">
+            <mat-option value="Poland">Poland</mat-option>
             <mat-option *ngFor="let city of cities" [value]="city">
               {{city}}
             </mat-option>
@@ -43,11 +44,11 @@
     </div>
   </div>
 </div>
-<ng-template #spinner>
+<div *ngIf="!isFetching && !vehicles.length" style="display: flex; align-items: center; justify-content: center; margin-top: 50px;">
+  <h1>No cars registered in the website <mat-icon style="padding-top: 2px;">sentiment_very_dissatisfied</mat-icon></h1>
+</div>
+<ng-template  #spinner>
   <div class="cust-spin">
     <mat-spinner diameter="100"></mat-spinner>
   </div>
 </ng-template>
-<div *ngIf="!isFetching && !vehicles.length" style="display: flex; align-items: center; justify-content: center; margin-top: 50px;">
-  <h1>No cars registered in the website <mat-icon style="padding-top: 2px;">sentiment_very_dissatisfied</mat-icon></h1>
-</div>
