@@ -23,7 +23,7 @@ class VehicleRepository extends ServiceEntityRepository
         parent::__construct($registry, Vehicle::class);
     }
 
-    public function search(string $text = null, string $city = null): array
+    public function search(string $text = null, string $city = null, int $userId = null): array
     {
         $queryBuilder = $this->createQueryBuilder('v');
  
@@ -36,6 +36,11 @@ class VehicleRepository extends ServiceEntityRepository
              $queryBuilder->andWhere('v.city = :city')
                  ->setParameter('city', $city);
          }
+
+         if ($userId) {
+            $queryBuilder->andWhere('v.user_id = :userId')
+                ->setParameter('userId', $userId);
+        }
  
          return $queryBuilder->getQuery()->getResult();
     } 

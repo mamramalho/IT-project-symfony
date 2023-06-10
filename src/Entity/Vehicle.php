@@ -60,28 +60,20 @@ class Vehicle
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "Vehicle")]
-    #[ORM\Column(nullable: true)]
-    private ?int $userId;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "vehicles")]
+    #[ORM\JoinColumn(name: 'user_id', nullable: false, referencedColumnName: 'id')]
+    private $user;
 
-    #[ORM\OneToMany(targetEntity:"App\Entity\Review", mappedBy:"vehicle")]
-    private $reviews;
-
-
-    public function __construct(int $userId)
+/*     #[ORM\OneToMany(targetEntity:"App\Entity\Review", mappedBy:"vehicle")]
+    private $reviews; */
+    public function getUser(): ?User
     {
-        $this->userId = $userId;
-        $this->reviews = new ArrayCollection();
+        return $this->user;
     }
 
-    public function getUserId(): ?int
+    public function setUser(?User $user): self
     {
-        return $this->userId;
-    }
-
-    public function setUserId(int $userId): self
-    {
-        $this->userId = $userId;
+        $this->user = $user;
         return $this;
     }
 
@@ -258,36 +250,4 @@ class Vehicle
 
         return $this;
     }
-
-    /**
-     * @return Collection|Review[]
-     */
-    public function getReviews(): Collection
-    {
-        return $this->reviews;
-    }
-
-    public function addReview(Review $review): self
-    {
-        if (!$this->reviews->contains($review)) {
-            $this->reviews[] = $review;
-            $review->setVehicle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReview(Review $review): self
-    {
-        if ($this->reviews->contains($review)) {
-            $this->reviews->removeElement($review);
-            // set the owning side to null (unless already changed)
-            if ($review->getVehicle() === $this) {
-                $review->setVehicle(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

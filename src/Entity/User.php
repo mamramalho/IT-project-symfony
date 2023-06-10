@@ -36,11 +36,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     
-    #[ORM\OneToMany(targetEntity:"App\Entity\Vehicle", mappedBy:"User", orphanRemoval:true)]
+    #[ORM\OneToMany(targetEntity: Vehicle::class, mappedBy:"user")]
     private $vehicles;
 
-    #[ORM\OneToMany(targetEntity:"App\Entity\Review", mappedBy:"user")]
-    private $reviews;
+   /*  #[ORM\OneToMany(targetEntity:"App\Entity\Review", mappedBy:"user")]
+    private $reviews; */
 
     public function getId(): ?int
     {
@@ -129,11 +129,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
     public function __construct()
     {
         $this->vehicles = new ArrayCollection();
-        $this->reviews = new ArrayCollection();
     }
 
     /**
@@ -146,56 +144,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function addVehicle(Vehicle $vehicle): self
     {
-        if (!$this->vehicles->contains($vehicle)) {
-            $this->vehicles[] = $vehicle;
-            $vehicle->setUserId($this->getId()); // Set the user ID in the vehicle entity
-        }
+        $this->vehicles[] = $vehicle;
 
         return $this;
     }
-
-    public function removeVehicle(Vehicle $vehicle): self
-    {
-        if ($this->vehicles->contains($vehicle)) {
-            // Check if the vehicle belongs to the current user
-            if ($vehicle->getUserId() === $this->getId()) {
-                // Remove the vehicle
-                $this->vehicles->removeElement($vehicle);
-            }
-        }
-    
-        return $this;
-    }
-
-    /**
-     * @return Collection|Review[]
-     */
-    public function getReviews(): Collection
-    {
-        return $this->reviews;
-    }
-
-    public function addReview(Review $review): self
-    {
-        if (!$this->reviews->contains($review)) {
-            $this->reviews[] = $review;
-            $review->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReview(Review $review): self
-    {
-        if ($this->reviews->contains($review)) {
-            $this->reviews->removeElement($review);
-            // set the owning side to null (unless already changed)
-            if ($review->getUser() === $this) {
-                $review->setUser(null);
-            }
-    }
-
-    return $this;
-}
 
 }
