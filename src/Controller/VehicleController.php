@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Vehicle;
 use App\Repository\VehicleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,9 +42,8 @@ class VehicleController extends AbstractController
     public function new(ManagerRegistry $doctrine, Request $request): JsonResponse
     {
         $user = $this->security->getUser();
-        $userId = $user->getId();
 
-        $vehicle = new Vehicle($userId);
+        $vehicle = new Vehicle();
 
         $em = $doctrine->getManager();
         $decoded = json_decode($request->getContent());
@@ -66,9 +66,10 @@ class VehicleController extends AbstractController
         $vehicle->setKms($decoded->kms);
         $vehicle->setImages($decoded->images);
         $vehicle->setCity($decoded->city);
-        $vehicle->setUserId($userId);
+        $vehicle->setUser($user);
 
         $em->persist($vehicle);
+        /* dd($vehicle); */
         $em->flush();
 
         $responseData = [
@@ -79,6 +80,14 @@ class VehicleController extends AbstractController
         return new JsonResponse($responseData);
     }
 
+    #[Route('/my', name: 'vehicle_my', methods: ['GET'])]
+    public function getMyVehicles(VehicleRepository $vehicleRepository, Request $request): JsonResponse
+    {
+        $user = $this->security->getUser();
+
+        $vehicles = $vehicleRepository->search($request->query->get('searchText'), $request->query->get('searchCity'), $user->getId());
+        return $this->json($vehicles);
+    }
 
     #[Route('/{id}', name: 'vehicle_show', methods: ['GET'])]
     public function show(Vehicle $vehicle): Response
