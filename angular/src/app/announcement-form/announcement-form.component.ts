@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Vehicle } from 'src/app/models/vehicle';
 import { ManageVehiclesService } from '../services/manage-vehicles.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-announcement-form',
@@ -77,6 +78,7 @@ export class AnnouncementFormComponent {
     private fb: FormBuilder,
     private vehicleService: ManageVehiclesService,
     private router: Router,
+    private _snackBar: MatSnackBar,
   ) {
     const currentYear = new Date().getFullYear();
     for (let year = currentYear; year >= 1886; year--) {
@@ -158,10 +160,16 @@ export class AnnouncementFormComponent {
       (response) => {
         this.requestInProgress = false;
         this.router.navigate(['']);
+        this._snackBar.open('New vehicle added', 'OK', {
+          duration: 4000
+        });
       },
       (error) => {
         console.log(error);
         this.requestInProgress = false;
+        this._snackBar.open('Image is too large, choose a smaller one', 'OK', {
+          duration: 4000
+        });
       }
     );
   }

@@ -28,3 +28,7 @@ body {
     --mdc-circular-progress-active-indicator-color: rgba(133, 115, 16, 0.601)!important;
 }
 
+.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+    color: rgba(255, 243, 22, 0.601)!important;
+}
+
