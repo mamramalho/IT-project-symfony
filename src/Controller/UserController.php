@@ -43,7 +43,6 @@ class UserController extends AbstractController
         $userData = [
             'id' => $user->getId(),
             'email' => $user->getEmail(),
-            'vehicles' => $user->getVehicles()
         ];
 
         return $this->json($userData);

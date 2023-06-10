@@ -28,14 +28,45 @@ class VehicleController extends AbstractController
     public function getAllVehicles(VehicleRepository $vehicleRepository, Request $request): JsonResponse
     {
         $vehicles = $vehicleRepository->search($request->query->get('searchText'), $request->query->get('searchCity'));
-        return $this->json($vehicles);
+
+        $vehiclesData = [];
+
+        foreach ($vehicles as $vehicle) {
+            $data = $this->serializeVehicle($vehicle);
+            $vehiclesData[] = $data;
+        }
+
+        return $this->json($vehiclesData);
     }
 
     #[Route('/{id}', name: 'vehicle_find', methods: ['GET'])]
     public function getVehicle($id, VehicleRepository $vehicleRepository): JsonResponse
     {
         $vehicle = $vehicleRepository->find($id);
-        return $this->json($vehicle);
+
+        $vehicleData = $this->serializeVehicle($vehicle);
+
+        return $this->json($vehicleData);
+    }
+
+    private function serializeVehicle(Vehicle $vehicle): array {
+        return [
+            'id' => $vehicle->getId(),
+            'name' => $vehicle->getName(),
+            'company' => $vehicle->getCompany(),
+            'type' => $vehicle->getType(),
+            'model' => $vehicle->getModel(),
+            'year' => $vehicle->getYear(),
+            'registerYear' => $vehicle->getRegisterYear(),
+            'price' => $vehicle->getPrice(),
+            'description' => $vehicle->getDescription(),
+            'color' => $vehicle->getColor(),
+            'fuel' => $vehicle->getFuel(),
+            'plate' => $vehicle->getPlate(),
+            'kms' => $vehicle->getKms(),
+            'images' => $vehicle->getImages(),
+            'userId' => $vehicle->getUser()->getId(),
+        ];
     }
 
     #[Route('/new', name: 'vehicle_new', methods: ['POST'])]
