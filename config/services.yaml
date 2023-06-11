@@ -6,8 +6,8 @@
 parameters:
 
 services:
-  # Enable autowiring for Conversation
-  App\Entity\Conversation:
+  # Autowiring for the User entity
+  App\Entity\User:
     autowire: true
 
   # Autowiring for the Review entity
