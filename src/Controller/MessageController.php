@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\SecurityBundle\Security;
 
-#[Route("/api/messages", name: "messages.")]
+#[Route("/api/message", name: "messages.")]
 class MessageController extends AbstractController
 {
     private const ATTRIBUTES_TO_SERIALIZE = ['id', 'content', 'createdAt', 'mine'];
