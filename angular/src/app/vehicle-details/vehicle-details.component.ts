@@ -25,8 +25,9 @@ export class VehicleDetailsComponent implements OnInit {
   images = [];
 
   isReviewFormShowing = false;
-
   isPublishingReview = false;
+
+  showChat = false;
 
   formReviewData = {
     content: ''

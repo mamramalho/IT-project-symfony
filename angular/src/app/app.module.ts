@@ -19,7 +19,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card'; 
 import { MatGridListModule } from '@angular/material/grid-list'; 
-import { MatTooltipModule } from '@angular/material/tooltip'; 
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -70,6 +71,7 @@ import { AccountDetailsComponent } from './account-details/account-details.compo
     MatCardModule,
     MatGridListModule,
     MatTooltipModule,
+    OverlayPanelModule,
   ],
   providers: [
     AuthService,

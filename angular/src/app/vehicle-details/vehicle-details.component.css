@@ -140,8 +140,54 @@
   margin-bottom: 15px;
 }
 
-
 .review {
   display: block;
   margin-right: 50px;
+}
+
+.chat-button-bottom {
+  background-color: black;
+  color: white;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.chatbox {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 280px;
+  z-index: 10;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+}
+
+.close-icon {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+  height: 50px;
+}
+
+.messages-container {
+  height: 300px;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-field {
+  height: 20px;
+  width: 278px;
+  margin-left: 1px;
 }

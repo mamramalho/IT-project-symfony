@@ -35,7 +35,7 @@
         <button
           class="chat-button"
           mat-raised-button
-          (click)="openChat()">
+          (click)="showChat = true">
           Chat
         </button>
       </div>
@@ -89,6 +89,28 @@
     </div>
   </div>
 </div>
+
+<ng-template #chatbox>
+  <div class="chatbox" *ngIf="announcer != null">
+    <div class="header-box">
+      <div style="margin-left: 8px;">Chat with announcer</div>
+      <mat-icon class="close-icon" (click)="showChat = !showChat">close</mat-icon>
+    </div>
+    <div class="messages-container">Not implemented</div>
+    <input class="message-field" type="text" placeholder="Write your message">
+  </div>
+</ng-template>
+<button
+  *ngIf="!showChat && announcer != null; else chatbox"
+  mat-raised-button
+  class="chat-button-bottom"
+  (click)="showChat = !showChat">
+  <div class="icon-align" style="margin-top: 15px;">
+    <mat-icon style="margin-right: 10px;">chat</mat-icon>
+    Chat with announcer
+  </div>
+</button>
+
 <ng-template #spinner>
     <div class="cust-spin">
       <mat-spinner diameter="100"></mat-spinner>
