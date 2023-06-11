@@ -1,11 +1,11 @@
 
 <div class="account-container" *ngIf="vehicles != null; else spinner">
-    <h1 class="title-info">Account info</h1>
+    <h1 class="title-info">My Account</h1>
     <div class="icon-align">
         <mat-icon style="margin-right: 10px;">account_circle</mat-icon>
         {{ user.email }}
     </div>
-    <h2>My Vehicles:</h2>
+    <h2 style="margin-top: 40px">My Vehicles:</h2>
     <div class="car-container">
         <div *ngFor="let vehicle of vehicles; let i = index;">
           <div class="car-row" *ngIf="i % 4 === 0">

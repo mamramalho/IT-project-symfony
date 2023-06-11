@@ -7,6 +7,7 @@ import { Vehicle } from '../models/vehicle';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
   searchText: string = '';
@@ -64,12 +65,14 @@ export class HomeComponent implements OnInit {
   }
 
   searchVehicle() {
+    this.isFetching = true;
     if (this.city == '') {
       this.city = 'Poland';
     }
     this.vehicleService.search(this.searchText, this.city).subscribe(
       (response) => {
         this.vehicles = response as Vehicle[];
+        this.isFetching = false;
       }
     );
   }

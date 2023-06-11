@@ -36,3 +36,30 @@ body {
     justify-content: flex-start !important ;
     align-items: flex-start !important;
 }
+
+.mdc-text-field .mdc-text-field__input {
+    caret-color: rgba(133, 115, 16, 0.601)!important;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch, .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
+    border-color: rgba(133, 115, 16, 0.601)!important;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: rgba(133, 115, 16, 0.601)!important;
+}
+
+.mat-mdc-form-field.mat-focused.mat-primary .mat-mdc-select-arrow {
+    color: rgba(133, 115, 16, 0.601)!important;
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    color: rgba(133, 115, 16, 0.601)!important;
+}
+
+.mat-pseudo-checkbox {
+    border-color: rgba(133, 115, 16, 0.601)!important;;
+    color: rgba(133, 115, 16, 0.601)!important;
+    stroke: rgba(133, 115, 16, 0.601)!important;
+    transition: border-color 90ms cubic-bezier(0.42, 0, 0.58, 1),background-color 90ms cubic-bezier(0.42, 0, 0.58, 1)!important;
+}

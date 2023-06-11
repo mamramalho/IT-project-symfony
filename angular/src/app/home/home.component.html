@@ -1,52 +1,55 @@
-<div *ngIf="vehicles.length || !isFetching; else spinner">
-  <mat-toolbar>
-    <mat-toolbar-row class="search-row">
-      <form>
-        <mat-form-field class="search-bar" appearance="outline">
-          <mat-icon matPrefix class="search-button" (click)="searchVehicle()">search</mat-icon>
-          <mat-label>Search for cars</mat-label>
-          <input 
-            matInput
-            name="searchInput"
-            [(ngModel)]="searchText"
-            (keyup.enter)="searchVehicle()">
-        </mat-form-field>
-        <mat-form-field class="location-field" appearance="outline">
-          <mat-icon matPrefix>location_on</mat-icon>  
-          <mat-label>Poland</mat-label>
-          <mat-select placeholder="Poland" (selectionChange)="onSelected($event.value)">
-            <mat-option value="Poland">Poland</mat-option>
-            <mat-option *ngFor="let city of cities" [value]="city">
-              {{city}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </form>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  
-  <div class="car-container">
-    <div *ngFor="let vehicle of vehicles; let i = index;">
-      <div class="car-row" *ngIf="i % 4 === 0">
-        <div 
-          class="car-preview"
-          *ngFor="let subVehicle of vehicles.slice(i, i + 4)"
-          [routerLink]="['/vehicle_details', subVehicle.id]">
-          <div class="car-image">
-            <img src="{{subVehicle.images[0]}}" alt="Car Image">
+<mat-toolbar>
+  <mat-toolbar-row class="search-row">
+    <form>
+      <mat-form-field class="search-bar" appearance="outline">
+        <mat-icon matPrefix class="search-button" (click)="searchVehicle()">search</mat-icon>
+        <mat-label>Search for cars</mat-label>
+        <input 
+          matInput
+          name="searchInput"
+          [(ngModel)]="searchText"
+          (keyup.enter)="searchVehicle()">
+      </mat-form-field>
+      <mat-form-field class="location-field" appearance="outline">
+        <mat-icon matPrefix>location_on</mat-icon>  
+        <mat-label>Poland</mat-label>
+        <mat-select placeholder="Poland" (selectionChange)="onSelected($event.value)">
+          <mat-option value="Poland">Poland</mat-option>
+          <mat-option *ngFor="let city of cities" [value]="city">
+            {{city}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div *ngIf="!isFetching; else spinner">
+  <div *ngIf="vehicles.length; else noVehicles">
+    <div class="car-container">
+      <div *ngFor="let vehicle of vehicles; let i = index;">
+        <div class="car-row" *ngIf="i % 4 === 0">
+          <div 
+            class="car-preview"
+            *ngFor="let subVehicle of vehicles.slice(i, i + 4)"
+            [routerLink]="['/vehicle_details', subVehicle.id]">
+            <div class="car-image">
+              <img src="{{subVehicle.images[0]}}" alt="Car Image">
+            </div>
+            <h2 class="car-title">{{ subVehicle.name }}</h2>
+            <p class="car-area">{{ subVehicle.city }}</p>
+            <p class="car-price"><b>{{ subVehicle.price | currency: 'PLN ' }}</b></p>
+            <button class="view-details-button">View Details</button>
           </div>
-          <h2 class="car-title">{{ subVehicle.name }}</h2>
-          <p class="car-area">{{ subVehicle.city }}</p>
-          <p class="car-price"><b>{{ subVehicle.price | currency: 'PLN ' }}</b></p>
-          <button class="view-details-button">View Details</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div *ngIf="!isFetching && !vehicles.length" style="display: flex; align-items: center; justify-content: center; margin-top: 50px;">
-  <h1>No cars registered in the website <mat-icon style="padding-top: 2px;">sentiment_very_dissatisfied</mat-icon></h1>
-</div>
+<ng-template #noVehicles>
+  <div style="display: flex; align-items: center; justify-content: center; margin-top: 50px;">
+    <h1>No cars registered in the website <mat-icon style="padding-top: 2px;">sentiment_very_dissatisfied</mat-icon></h1>
+  </div>
+</ng-template>
 <ng-template  #spinner>
   <div class="cust-spin">
     <mat-spinner diameter="100"></mat-spinner>
