@@ -20,8 +20,8 @@ class ReviewController extends AbstractController
     private function serializeReview(Review $review): array {
         return [
             'id' => $review->getId(),
-            'user_id' => $review->getUser()->getId(),
-            'vehicle_id' => $review->getVehicle()->getId(),
+            'userId' => $review->getUser()->getId(),
+            'vehicleId' => $review->getVehicle()->getId(),
             'content' => $review->getContent(),
         ];
     }
@@ -31,6 +31,20 @@ class ReviewController extends AbstractController
         $this->security = $security;
     }
 
+    #[Route('/', name: 'review_index', methods: ['GET'])]
+    public function getAllReviews(ReviewRepository $reviewRepository): JsonResponse
+    {
+        $reviews = $reviewRepository->findAll();
+
+        $reviewsData = [];
+        foreach ($reviews as $review) {
+            $data = $this->serializeReview($review);
+            $reviewsData[] = $data;
+        }
+
+        return $this->json($reviewsData);
+    }
+
     #[Route('/{id}', name: 'review_find', methods: ['GET'])]
     public function getReview($id, ReviewRepository $reviewRepository): JsonResponse
     {
@@ -38,33 +52,5 @@ class ReviewController extends AbstractController
         $reviewData = $this->serializeReview($review);
 
         return $this->json($reviewData);
-    }
-
-    #[Route('/new', name: 'review_new', methods: ['POST'])]
-    public function newReview(ManagerRegistry $doctrine, Request $request, Review $review): JsonResponse
-    {
-        $user = $this->security->getUser();
-        //get vehicles missing!!!
-        $vehicle = $review->getVehicle();
-        $review = new Review();
-        
-
-        $em = $doctrine->getManager();
-        $decoded = json_decode($request->getContent());
-
-        $review->setUser($user);
-        $review->setVehicle($vehicle->getId());
-        $review->setContent($decoded->content);
-        dd($review);
-        $em->persist($review);
-        $em->flush();
-
-        $responseData = [
-            'success' => true,
-            'message' => 'Review added successfully'
-        ];
-
-        return new JsonResponse($responseData);
-
     }
 }

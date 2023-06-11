@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Review;
 use App\Entity\User;
 use App\Entity\Vehicle;
 use App\Repository\VehicleRepository;
@@ -35,6 +36,7 @@ class VehicleController extends AbstractController
             'plate' => $vehicle->getPlate(),
             'kms' => $vehicle->getKms(),
             'images' => $vehicle->getImages(),
+            'city' => $vehicle->getCity(),
             'userId' => $vehicle->getUser()->getId(),
         ];
     }
@@ -124,6 +126,56 @@ class VehicleController extends AbstractController
         }
 
         return $this->json($vehiclesData);
+    }
+
+    #[Route('/{id}/reviews/new', name: 'vehicle_add_review', methods: ['POST'])]
+    public function newVehicleReview($id, ManagerRegistry $doctrine, VehicleRepository $vehicleRepository, Request $request): JsonResponse
+    {
+        $user = $this->security->getUser();
+        $vehicle = $vehicleRepository->find($id);
+
+        $review = new Review();
+
+        $em = $doctrine->getManager();
+        $decoded = json_decode($request->getContent());
+
+        $review->setUser($user);
+        $review->setVehicle($vehicle);
+        $review->setContent($decoded->content);
+
+        $em->persist($review);
+        $em->flush();
+
+        $responseData = [
+            'success' => true,
+            'message' => 'Review added successfully'
+        ];
+
+        return new JsonResponse($responseData);
+    }
+
+    #[Route('/{id}/reviews', name: 'vehicle_reviews', methods: ['GET'])]
+    public function getVehicleReviews($id, VehicleRepository $vehicleRepository): JsonResponse
+    {
+        $vehicle = $vehicleRepository->find($id);
+        $reviews = $vehicle->getReviews();
+
+        $reviewsSerialized = [];
+        foreach ($reviews as $review) {
+            $data = $this->serializeReview($review);
+            $reviewsSerialized[] = $data;
+        }
+
+        return $this->json($reviewsSerialized);
+    }
+
+    private function serializeReview(Review $review): array {
+        return [
+            'id' => $review->getId(),
+            'userEmail' => $review->getUser()->getEmail(),
+            'vehicle_id' => $review->getVehicle()->getId(),
+            'content' => $review->getContent(),
+        ];
     }
 
     #[Route('/{id}', name: 'vehicle_show', methods: ['GET'])]

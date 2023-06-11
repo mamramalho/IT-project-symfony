@@ -40,6 +40,52 @@
         </button>
       </div>
     </div>
+    <div class="reviews-container">
+      <button
+        mat-raised-button
+        class="new-review-button"
+        (click)="isReviewFormShowing = true"
+        *ngIf="!isReviewFormShowing; else newReview">
+        Make Review +
+      </button>
+      <ng-template #newReview>
+        <div class="new-review-container">
+          <h2>Write a review</h2>
+          <form (ngSubmit)="onSubmit()">
+            <mat-form-field class="review-field">
+              <textarea
+                matInput
+                type="text"
+                name="content" 
+                [(ngModel)]="formReviewData.content" 
+                required>
+              </textarea>
+            </mat-form-field>
+            <br>
+            <div *ngIf="!isPublishingReview; else spinner2">
+              <button mat-raised-button (click)="isReviewFormShowing = false">Cancel</button>
+              <button mat-raised-button class="submit-review-button" type="submit">Submit</button>
+            </div>
+            <ng-template #spinner2>
+              <div class="spinner2">
+                <mat-spinner diameter="30"></mat-spinner>
+              </div>
+            </ng-template>
+          </form>
+        </div>
+      </ng-template>
+      <h2 style="margin-top: 25px;">Reviews</h2>
+      <mat-grid-list cols="1" rowHeight="100px">
+        <mat-grid-tile *ngFor="let review of reviews">
+          <div class="icon-align">
+            <mat-icon style="margin-right: 10px;">account_circle</mat-icon>
+            {{ review.userEmail }}
+          </div>
+          <br>
+          {{ review.content }}
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
   </div>
 </div>
 <ng-template #spinner>

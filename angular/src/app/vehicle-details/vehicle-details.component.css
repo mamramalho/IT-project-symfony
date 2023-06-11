@@ -99,6 +99,39 @@
 
 .description-container {
   margin-left: 110px;
+  margin-right: 50px;
   margin-top: 40px;
   padding-bottom: 40px;
 }
+
+.reviews-container {
+  flex-direction: column;
+  margin-left: 110px;
+  margin-top: 40px;
+}
+
+.spinner2 {
+  align-items: center;
+  justify-content: center;
+}
+
+.new-review-container {
+  flex-direction: column;
+}
+
+.review-field {
+  width: 1200px;
+}
+
+.submit-review-button {
+  background-color: rgb(0, 187, 0);
+  color: white;
+  margin-left: 10px;
+}
+
+.icon-align {
+  display: flex;
+  align-items: center;
+}
+
+

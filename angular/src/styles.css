@@ -32,3 +32,7 @@ body {
     color: rgba(255, 243, 22, 0.601)!important;
 }
 
+.mat-grid-tile-content {
+    justify-content: flex-start !important ;
+    align-items: flex-start !important;
+}

@@ -8,6 +8,7 @@ import { Review } from '../models/review';
 import { GalleryItem, ImageItem } from 'ng-gallery';
 import { ManageUsersService } from '../services/manage-users.service';
 import { User } from '../models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -18,14 +19,25 @@ export class VehicleDetailsComponent implements OnInit {
 
   vehicle: Vehicle;
   announcer: User;
+  reviews: Review[];
 
   specs = [];
   images = [];
+
+  isReviewFormShowing = false;
+
+  isPublishingReview = false;
+
+  formReviewData = {
+    content: ''
+  }
 
   constructor(
     private route: ActivatedRoute,
     private vehicleService: ManageVehiclesService,
     private userService: ManageUsersService,
+    private reviewService: ManageReviewService,
+    private _snackBar: MatSnackBar,
   ) { }
 
   async ngOnInit() {
@@ -35,8 +47,6 @@ export class VehicleDetailsComponent implements OnInit {
       try {
         const response = await this.vehicleService.getVehicle(id).toPromise();
         this.vehicle = response as Vehicle;
-
-        console.log(this.vehicle);
   
         this.specs = [
           { spec: 'Brand', value: this.vehicle.company },
@@ -55,15 +65,18 @@ export class VehicleDetailsComponent implements OnInit {
           this.images.push(new ImageItem({ src: src, thumb: src }));
         }
 
-        console.log(this.vehicle.userId);
-
         this.userService.getUser(this.vehicle.userId).subscribe(
-          (response) => {
+          async (response) => {
             this.announcer = response as User;
           }
         );
 
-        
+        this.vehicleService.getReviews(this.vehicle.id).subscribe(
+          async (response) => {
+            this.reviews = response as Review[];
+            console.log(this.reviews);
+          }
+        );
 
       } catch (error) {
         console.error(error);
@@ -73,5 +86,27 @@ export class VehicleDetailsComponent implements OnInit {
 
   openChat() {
     //TODO
+  }
+
+  onSubmit() {
+    this.isPublishingReview = true;
+    const review = new Review(this.formReviewData.content);
+    this.vehicleService.addReview(this.vehicle.id, review).subscribe(
+      (response) => {
+        this.isPublishingReview = false;
+        this.isReviewFormShowing = false;
+        console.log(response);
+        const info = `Added a new review to ${this.vehicle.name}`;
+        this._snackBar.open(info, 'OK', {
+          duration: 4000,
+        });
+        this.vehicleService.getReviews(this.vehicle.id).subscribe(
+          async (response) => {
+            this.reviews = response as Review[];
+            console.log(this.reviews);
+          }
+        );
+      }
+    );
   }
 }

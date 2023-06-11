@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Vehicle } from '../models/vehicle';
 import { Observable } from 'rxjs';
+import { Review } from '../models/review';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,14 @@ export class ManageVehiclesService {
 
   getVehicle(vehicleId: number): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}/${vehicleId}`);
+  }
+
+  addReview(vehicleId: number, review: Review): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/${vehicleId}/reviews/new`, review);
+  }
+
+  getReviews(vehicleId: number): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}/${vehicleId}/reviews`);
   }
 
   search(text: string|null, city: string|null): Observable<any> {
