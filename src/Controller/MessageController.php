@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route("/messages", name:"messages.")]
+#[Route("/api/messages", name:"messages.")]
 
 class MessageController extends AbstractController
 {
@@ -34,9 +34,7 @@ class MessageController extends AbstractController
      */
     private $userRepository;
 
-    public function __construct(EntityManagerInterface $entityManager,
-                                MessageRepository $messageRepository,
-                                UserRepository $userRepository)
+    public function __construct(EntityManagerInterface $entityManager, MessageRepository $messageRepository, UserRepository $userRepository)
     {
         $this->entityManager = $entityManager;
         $this->messageRepository = $messageRepository;
@@ -69,15 +67,16 @@ class MessageController extends AbstractController
         ]);
     }
 
-    #[Route("/{id}", name: "newMessage", methods: ['POST'])]
+    #[Route("/new", name: "newMessage", methods: ['POST'])]
     public function newMessage(Request $request, Conversation $conversation)
     {
         $user = $this->getUser();
         $content = $request->get('content', null);
         $message = new Message();
         $message->setContent($content);
-        $message->setUser($this->userRepository->findOneBy(['id' => 2]));
+        $message->setUser($user);
         $message->setMine(true);
+        dd($message);
 
         $conversation->addMessage($message);
         $conversation->setLastMessage($message);

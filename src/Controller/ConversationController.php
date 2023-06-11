@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route("/conversations", name: "conversations.")]
+#[Route("/api/conversations", name: "conversations.")]
 class ConversationController extends AbstractController
 {
     /**
@@ -30,16 +30,21 @@ class ConversationController extends AbstractController
      */
     private $conversationRepository;
 
-    public function __construct(UserRepository $userRepository,
-                                EntityManagerInterface $entityManager,
-ConversationRepository $conversationRepository)
+    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManager, ConversationRepository $conversationRepository)
     {
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
         $this->conversationRepository = $conversationRepository;
     }
 
-    #[Route("/", name: "newConversations", methods: ['POST'])]
+    #[Route("/", name: "getConversations", methods: ['GET'])]
+    public function getConvs() {
+        $conversations = $this->conversationRepository->findConversationsByUser($this->getUser()->getId());
+
+        return $this->json($conversations);
+    }
+
+    #[Route("/new", name: "newConversations", methods: ['POST'])]
     public function index(Request $request)
     {
         $otherUser = $request->get('otherUser', 0);
@@ -92,14 +97,4 @@ ConversationRepository $conversationRepository)
             'id' => $conversation->getId()
         ], Response::HTTP_CREATED, [], []);
     }
-    
-    
-    #[Route("/", name: "getConversations", methods: ['GET'])]
-    
-    public function getConvs() {
-        $conversations = $this->conversationRepository->findConversationsByUser($this->getUser()->getId());
-
-        return $this->json($conversations);
-    }
-
 }

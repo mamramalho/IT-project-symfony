@@ -69,6 +69,22 @@ class VehicleController extends AbstractController
         return $this->json($vehiclesData);
     }
 
+    #[Route('/my', name: 'vehicle_my', methods: ['GET'])]
+    public function getMyVehicles(VehicleRepository $vehicleRepository, Request $request): JsonResponse
+    {
+        $user = $this->security->getUser();
+
+        $vehicles = $vehicleRepository->search($request->query->get('searchText'), $request->query->get('searchCity'), $user);
+        $vehiclesData = [];
+
+        foreach ($vehicles as $vehicle) {
+            $data = $this->serializeVehicle($vehicle);
+            $vehiclesData[] = $data;
+        }
+
+        return $this->json($vehiclesData);
+    }
+
     #[Route('/{id}', name: 'vehicle_find', methods: ['GET'])]
     public function getVehicle($id, VehicleRepository $vehicleRepository): JsonResponse
     {
@@ -121,21 +137,7 @@ class VehicleController extends AbstractController
         return new JsonResponse($responseData);
     }
 
-    #[Route('/my', name: 'vehicle_my', methods: ['GET'])]
-    public function getMyVehicles(VehicleRepository $vehicleRepository, Request $request): JsonResponse
-    {
-        $user = $this->security->getUser();
-
-        $vehicles = $vehicleRepository->search($request->query->get('searchText'), $request->query->get('searchCity'), $user->getId());
-        $vehiclesData = [];
-
-        foreach ($vehicles as $vehicle) {
-            $data = $this->serializeVehicle($vehicle);
-            $vehiclesData[] = $data;
-        }
-
-        return $this->json($vehiclesData);
-    }
+    
 
     #[Route('/{id}/reviews/new', name: 'vehicle_add_review', methods: ['POST'])]
     public function newVehicleReview($id, ManagerRegistry $doctrine, VehicleRepository $vehicleRepository, Request $request): JsonResponse
