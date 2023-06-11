@@ -12,11 +12,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\SecurityBundle\Security;
 
 
 #[Route("/api/conversations", name: "conversations.")]
 class ConversationController extends AbstractController
 {
+    private $security;
     /**
      * @var UserRepository
      */
@@ -30,17 +32,21 @@ class ConversationController extends AbstractController
      */
     private $conversationRepository;
 
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManager, ConversationRepository $conversationRepository)
+    public function __construct(Security $security, UserRepository $userRepository, EntityManagerInterface $entityManager, ConversationRepository $conversationRepository)
     {
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
         $this->conversationRepository = $conversationRepository;
+        $this->security = $security;
     }
 
     #[Route("/", name: "getConversations", methods: ['GET'])]
-    public function getConvs() {
-        $conversations = $this->conversationRepository->findConversationsByUser($this->getUser()->getId());
+    public function getConvs(ConversationRepository $conversationRepository): JsonResponse 
+    {
+        $user = $this->security->getUser();
+        $conversations = $conversationRepository->findConversationsByUser($this->$user->getId());
 
+        dd($conversations);
         return $this->json($conversations);
     }
 
