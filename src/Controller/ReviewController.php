@@ -17,15 +17,6 @@ class ReviewController extends AbstractController
 {
     private $security;
 
-    private function serializeReview(Review $review): array {
-        return [
-            'id' => $review->getId(),
-            'userId' => $review->getUser()->getId(),
-            'vehicleId' => $review->getVehicle()->getId(),
-            'content' => $review->getContent(),
-        ];
-    }
-
     public function __construct(Security $security)
     {
         $this->security = $security;

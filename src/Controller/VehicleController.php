@@ -41,6 +41,15 @@ class VehicleController extends AbstractController
         ];
     }
 
+    private function serializeReview(Review $review): array {
+        return [
+            'id' => $review->getId(),
+            'userEmail' => $review->getUser()->getEmail(),
+            'vehicle_id' => $review->getVehicle()->getId(),
+            'content' => $review->getContent(),
+        ];
+    }
+
     public function __construct(Security $security)
     {
         $this->security = $security;
@@ -167,15 +176,6 @@ class VehicleController extends AbstractController
         }
 
         return $this->json($reviewsSerialized);
-    }
-
-    private function serializeReview(Review $review): array {
-        return [
-            'id' => $review->getId(),
-            'userEmail' => $review->getUser()->getEmail(),
-            'vehicle_id' => $review->getVehicle()->getId(),
-            'content' => $review->getContent(),
-        ];
     }
 
     #[Route('/{id}', name: 'vehicle_show', methods: ['GET'])]

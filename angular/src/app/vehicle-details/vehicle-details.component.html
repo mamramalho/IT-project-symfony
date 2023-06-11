@@ -41,6 +41,7 @@
       </div>
     </div>
     <div class="reviews-container">
+      <h2 style="margin-top: 25px;">Reviews</h2>
       <button
         mat-raised-button
         class="new-review-button"
@@ -50,7 +51,7 @@
       </button>
       <ng-template #newReview>
         <div class="new-review-container">
-          <h2>Write a review</h2>
+          <h3>Write a review</h3>
           <form (ngSubmit)="onSubmit()">
             <mat-form-field class="review-field">
               <textarea
@@ -74,15 +75,15 @@
           </form>
         </div>
       </ng-template>
-      <h2 style="margin-top: 25px;">Reviews</h2>
       <mat-grid-list cols="1" rowHeight="100px">
         <mat-grid-tile *ngFor="let review of reviews">
-          <div class="icon-align">
-            <mat-icon style="margin-right: 10px;">account_circle</mat-icon>
-            {{ review.userEmail }}
+          <div class="review">
+            <div class="icon-align">
+              <mat-icon style="margin-right: 10px;">account_circle</mat-icon>
+              {{ review.userEmail }}
+            </div>
+            {{ review.content }}
           </div>
-          <br>
-          {{ review.content }}
         </mat-grid-tile>
       </mat-grid-list>
     </div>

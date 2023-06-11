@@ -117,6 +117,11 @@
 
 .new-review-container {
   flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.new-review-button {
+  margin-bottom: 30px;
 }
 
 .review-field {
@@ -132,6 +137,11 @@
 .icon-align {
   display: flex;
   align-items: center;
+  margin-bottom: 15px;
 }
 
 
+.review {
+  display: block;
+  margin-right: 50px;
+}
