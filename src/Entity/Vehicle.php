@@ -64,8 +64,9 @@ class Vehicle
     #[ORM\JoinColumn(name: 'user_id', nullable: false, referencedColumnName: 'id')]
     private $user;
 
-/*     #[ORM\OneToMany(targetEntity:"App\Entity\Review", mappedBy:"vehicle")]
-    private $reviews; */
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: "vehicle")]
+    private $reviews;
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -247,6 +248,22 @@ class Vehicle
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReviews(Review $review): self
+    {
+        $this->reviews[] = $review;
 
         return $this;
     }

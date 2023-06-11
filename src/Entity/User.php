@@ -39,8 +39,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Vehicle::class, mappedBy:"user")]
     private $vehicles;
 
-   /*  #[ORM\OneToMany(targetEntity:"App\Entity\Review", mappedBy:"user")]
-    private $reviews; */
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: "user")]
+    private $reviews;
 
     public function getId(): ?int
     {
@@ -132,6 +132,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->vehicles = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     /**
@@ -145,6 +146,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function addVehicle(Vehicle $vehicle): self
     {
         $this->vehicles[] = $vehicle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->contains($review)) {
+            $this->reviews->removeElement($review);
+            if ($review->getUser() === $this) {
+                $review->setUser(null);
+            }
+        }
 
         return $this;
     }

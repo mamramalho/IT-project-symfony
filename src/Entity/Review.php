@@ -15,12 +15,12 @@ class Review
     #[ORM\Column(type:"integer")]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity:"App\Entity\User")]
-    #[ORM\JoinColumn(nullable:false)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "reviews")]
+    #[ORM\JoinColumn(name: 'user_id', nullable: false, referencedColumnName: 'id')]
     private $user;
 
-    #[ORM\ManyToOne(targetEntity:"App\Entity\Vehicle", inversedBy:"reviews")]
-    #[ORM\JoinColumn(nullable:false)]
+    #[ORM\ManyToOne(targetEntity: Vehicle::class, inversedBy: "reviews")]
+    #[ORM\JoinColumn(name: 'vehicle_id', nullable: false, referencedColumnName: 'id')]
     private $vehicle;
 
     #[ORM\Column(type:"text")]
@@ -39,7 +39,6 @@ class Review
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
         return $this;
     }
 
@@ -51,7 +50,6 @@ class Review
     public function setVehicle(?Vehicle $vehicle): self
     {
         $this->vehicle = $vehicle;
-
         return $this;
     }
 
