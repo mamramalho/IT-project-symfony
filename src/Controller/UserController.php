@@ -19,7 +19,7 @@ class UserController extends AbstractController
 {
 
     #[Route('/', name: 'user_index', methods: ['GET'])]
-    public function getAllVehicles(UserRepository $userRepository, Request $request): JsonResponse
+    public function getAllUsers(UserRepository $userRepository, Request $request): JsonResponse
     {
         $users = $userRepository->findAll();
 
@@ -39,6 +39,19 @@ class UserController extends AbstractController
     public function getUserWithId($id, UserRepository $userRepository): JsonResponse
     {
         $user = $userRepository->find($id);
+
+        $userData = [
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+        ];
+
+        return $this->json($userData);
+    }
+
+    #[Route('/email/{email}', name: 'user_find_email', methods: ['GET'])]
+    public function getUserWithEmail($email, UserRepository $userRepository): JsonResponse
+    {
+        $user = $userRepository->findOneBy(['email' => $email]);
 
         $userData = [
             'id' => $user->getId(),

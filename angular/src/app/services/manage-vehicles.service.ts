@@ -36,6 +36,10 @@ export class ManageVehiclesService {
     return this.httpClient.get(`${this.baseUrl}/${vehicleId}/reviews`);
   }
 
+  getMyVehicles(): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}/my`);
+  }
+
   search(text: string|null, city: string|null): Observable<any> {
     let params = new HttpParams();
     let data = {searchText: text, searchCity: city};

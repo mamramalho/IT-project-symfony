@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Vehicle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 use function PHPUnit\Framework\equalTo;
 use function PHPUnit\Framework\equalToIgnoringCase;
 
@@ -23,7 +25,7 @@ class VehicleRepository extends ServiceEntityRepository
         parent::__construct($registry, Vehicle::class);
     }
 
-    public function search(string $text = null, string $city = null, int $userId = null): array
+    public function search(string $text = null, string $city = null, UserInterface $user = null): array
     {
         $queryBuilder = $this->createQueryBuilder('v');
  
@@ -37,11 +39,11 @@ class VehicleRepository extends ServiceEntityRepository
                  ->setParameter('city', $city);
          }
 
-         if ($userId) {
-            $queryBuilder->andWhere('v.user_id = :userId')
-                ->setParameter('userId', $userId);
+         if ($user) {
+            $queryBuilder->andWhere('v.user = :user')
+                ->setParameter('user', $user);
         }
- 
+
          return $queryBuilder->getQuery()->getResult();
     } 
 

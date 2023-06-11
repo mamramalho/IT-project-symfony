@@ -9,9 +9,13 @@ import { User } from '../models/user';
 export class AuthService {
   private baseUrl = 'http://localhost:8888/api'
 
+  public currentUser: any;
+
   constructor(private httpClient: HttpClient) { }
 
   login(credentials: any): Observable<any> {
+    localStorage.setItem('currentUser', credentials.username);
+
     return this.httpClient.post(this.baseUrl+'/login_check', credentials)
       .pipe(
         map((response: any) => {
@@ -26,6 +30,7 @@ export class AuthService {
   logout(): void {
     // Remove the token from localStorage
     localStorage.removeItem('access_token');
+    localStorage.removeItem('currentUser');
   }
 
   isLoggedIn() {

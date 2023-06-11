@@ -19,6 +19,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card'; 
 import { MatGridListModule } from '@angular/material/grid-list'; 
+import { MatTooltipModule } from '@angular/material/tooltip'; 
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -32,6 +33,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ManageVehiclesService } from './services/manage-vehicles.service';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
     AnnouncementFormComponent,
     VehicleDetailsComponent,
     AuthDialogComponent,
+    AccountDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
     MatListModule,
     MatCardModule,
     MatGridListModule,
+    MatTooltipModule,
   ],
   providers: [
     AuthService,

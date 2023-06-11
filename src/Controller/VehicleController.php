@@ -74,7 +74,7 @@ class VehicleController extends AbstractController
     {
         $user = $this->security->getUser();
 
-        $vehicles = $vehicleRepository->search($request->query->get('searchText'), $request->query->get('searchCity'), $user);
+        $vehicles = $vehicleRepository->search(null, null, $user);
         $vehiclesData = [];
 
         foreach ($vehicles as $vehicle) {

@@ -9,13 +9,18 @@
                 style="cursor: pointer"
                 routerLink="/">
             <span class="spacer"></span>
-            <button *ngIf="isLoggedIn()" (click)="logout()" mat-icon-button class="logout-button">
+            <button 
+                *ngIf="isLoggedIn()" 
+                (click)="logout()" 
+                mat-icon-button class="logout-button"
+                matTooltip="Log out">
                 <mat-icon>logout</mat-icon>
             </button>
             <button 
                 mat-icon-button 
+                [matTooltip]="getCurrentUser()"
                 class="my-account-button"
-                (click)="openAuthDialog()">
+                (click)="accountOrAuth()">
                 <mat-icon>person</mat-icon>
             </button>
             <button mat-raised-button routerLink="/announce">Announce and Sell</button>

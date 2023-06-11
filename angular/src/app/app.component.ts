@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
+import { Router } from '@angular/router';
+import { ManageUsersService } from './services/manage-users.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +14,13 @@ import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 export class AppComponent {
   title = 'it-project-angular';
 
+  currentUser: string;
+
   constructor(
     private authService: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private userService: ManageUsersService,
   ) {}
 
   isLoggedIn(): boolean {
@@ -24,10 +31,27 @@ export class AppComponent {
     this.authService.logout();
   }
 
-  openAuthDialog() {
-    this.dialog.open(AuthDialogComponent, {
-      width: '380px',
-    });
+  accountOrAuth() {
+    const access_token = localStorage.getItem('access_token')
+    if (access_token) {
+      let decodedToken = jwt_decode(access_token) as any;
+      this.router.navigate([`/users/${decodedToken.username}`]);
+    }
+    else {
+      this.dialog.open(AuthDialogComponent, {
+        width: '380px',
+      });
+    }
+  }
+
+  getCurrentUser() {
+    const username = localStorage.getItem('currentUser');
+
+    if(username != null) {
+      return username;
+    }
+
+    return 'Log in or register';
   }
   
 }
