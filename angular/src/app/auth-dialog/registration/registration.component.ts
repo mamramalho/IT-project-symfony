@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -19,7 +20,8 @@ export class RegistrationComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private _snackBar: MatSnackBar,
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -38,6 +40,11 @@ export class RegistrationComponent {
         console.log(response);
         this.requestInProgress = false;
         this.doneRegistration.emit();
+
+        const message = 'New user registered';
+        this._snackBar.open(message, 'OK', {
+          duration: 4000
+        });
       }
     );
   }

@@ -35,6 +35,8 @@ export class VehicleDetailsComponent implements OnInit {
       try {
         const response = await this.vehicleService.getVehicle(id).toPromise();
         this.vehicle = response as Vehicle;
+
+        console.log(this.vehicle);
   
         this.specs = [
           { spec: 'Brand', value: this.vehicle.company },
@@ -53,14 +55,17 @@ export class VehicleDetailsComponent implements OnInit {
           this.images.push(new ImageItem({ src: src, thumb: src }));
         }
 
+        console.log(this.vehicle.userId);
+
         this.userService.getUser(this.vehicle.userId).subscribe(
           (response) => {
             this.announcer = response as User;
           }
         );
 
+        
+
       } catch (error) {
-        // Handle any errors that occurred during the async operation
         console.error(error);
       }
     });

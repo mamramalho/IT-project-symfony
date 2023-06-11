@@ -14,6 +14,7 @@ import { CarouselModule } from '@coreui/angular';
 import { MatTableModule } from '@angular/material/table';
 import { GalleryModule, GALLERY_CONFIG } from  'ng-gallery';
 import { MatDialogModule } from '@angular/material/dialog'; 
+import { MatSnackBarModule } from '@angular/material/snack-bar'; 
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -56,6 +57,7 @@ import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
     MatTableModule,
     GalleryModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [
     AuthService,
