@@ -19,6 +19,26 @@ class VehicleController extends AbstractController
 {
     private $security;
 
+    private function serializeVehicle(Vehicle $vehicle): array {
+        return [
+            'id' => $vehicle->getId(),
+            'name' => $vehicle->getName(),
+            'company' => $vehicle->getCompany(),
+            'type' => $vehicle->getType(),
+            'model' => $vehicle->getModel(),
+            'year' => $vehicle->getYear(),
+            'registerYear' => $vehicle->getRegisterYear(),
+            'price' => $vehicle->getPrice(),
+            'description' => $vehicle->getDescription(),
+            'color' => $vehicle->getColor(),
+            'fuel' => $vehicle->getFuel(),
+            'plate' => $vehicle->getPlate(),
+            'kms' => $vehicle->getKms(),
+            'images' => $vehicle->getImages(),
+            'userId' => $vehicle->getUser()->getId(),
+        ];
+    }
+
     public function __construct(Security $security)
     {
         $this->security = $security;
@@ -47,25 +67,6 @@ class VehicleController extends AbstractController
         return $this->json($vehicleData);
     }
 
-    private function serializeVehicle(Vehicle $vehicle): array {
-        return [
-            'id' => $vehicle->getId(),
-            'name' => $vehicle->getName(),
-            'company' => $vehicle->getCompany(),
-            'type' => $vehicle->getType(),
-            'model' => $vehicle->getModel(),
-            'year' => $vehicle->getYear(),
-            'registerYear' => $vehicle->getRegisterYear(),
-            'price' => $vehicle->getPrice(),
-            'description' => $vehicle->getDescription(),
-            'color' => $vehicle->getColor(),
-            'fuel' => $vehicle->getFuel(),
-            'plate' => $vehicle->getPlate(),
-            'kms' => $vehicle->getKms(),
-            'images' => $vehicle->getImages(),
-            'userId' => $vehicle->getUser()->getId(),
-        ];
-    }
 
     #[Route('/new', name: 'vehicle_new', methods: ['POST'])]
     public function new(ManagerRegistry $doctrine, Request $request): JsonResponse

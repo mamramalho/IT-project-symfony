@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,11 +37,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     
-    #[ORM\OneToMany(targetEntity: Vehicle::class, mappedBy:"user")]
+    #[ORM\OneToMany(targetEntity: Vehicle::class, mappedBy: "user")]
     private $vehicles;
 
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: "user")]
     private $reviews;
+
+    #[ORM\OneToMany(targetEntity: Participant::class, mappedBy: "user")]
+    private $participants;
+
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: "user")]
+    private $messages;
 
     public function getId(): ?int
     {
@@ -133,6 +140,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->vehicles = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->participants = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     /**
@@ -174,6 +183,68 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->reviews->removeElement($review);
             if ($review->getUser() === $this) {
                 $review->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(Participant $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+            $participant->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Participant $participant): self
+    {
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+            // set the owning side to null (unless already changed)
+            if ($participant->getUser() === $this) {
+                $participant->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            // set the owning side to null (unless already changed)
+            if ($message->getUser() === $this) {
+                $message->setUser(null);
             }
         }
 
