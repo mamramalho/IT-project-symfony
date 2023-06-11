@@ -116,7 +116,14 @@ class VehicleController extends AbstractController
         $user = $this->security->getUser();
 
         $vehicles = $vehicleRepository->search($request->query->get('searchText'), $request->query->get('searchCity'), $user->getId());
-        return $this->json($vehicles);
+        $vehiclesData = [];
+
+        foreach ($vehicles as $vehicle) {
+            $data = $this->serializeVehicle($vehicle);
+            $vehiclesData[] = $data;
+        }
+
+        return $this->json($vehiclesData);
     }
 
     #[Route('/{id}', name: 'vehicle_show', methods: ['GET'])]
